@@ -1,0 +1,374 @@
+/*
+Theme Name: Firestarter 2.1 Working
+Theme URI: http://www.mccartin.info
+Author: John McCartin
+Author URI: http://mccartin.info/
+Description: An absolute bare-bones WordPress starter theme based on H5BP & Pure CSS
+Version: 2.0.0
+Tags: starter, h5bp, sass, pure
+
+No rights reserved.
+
+Workin in SASS.
+
+
+
+
+      ___           ___       ___       ___           ___     
+     /\  \         /\__\     /\__\     /\  \         |\__\    
+    /::\  \       /:/  /    /:/  /    /::\  \        |:|  |   
+   /:/\:\  \     /:/  /    /:/  /    /:/\:\  \       |:|  |   
+  /::\~\:\  \   /:/  /    /:/  /    /::\~\:\  \      |:|__|__ 
+ /:/\:\ \:\__\ /:/__/    /:/__/    /:/\:\ \:\__\     /::::\__\
+ \/__\:\/:/  / \:\  \    \:\  \    \:\~\:\ \/__/    /:/~~/~   
+      \::/  /   \:\  \    \:\  \    \:\ \:\__\     /:/  /     
+      /:/  /     \:\  \    \:\  \    \:\ \/__/     \/__/      
+     /:/  /       \:\__\    \:\__\    \:\__\                  
+     \/__/         \/__/     \/__/     \/__/                  
+     
+      ___           ___           ___           ___           ___     
+     /\__\         /\  \         /\__\         /\  \         /\  \    
+    /:/  /        /::\  \       /:/  /        /::\  \       /::\  \   
+   /:/__/        /:/\:\  \     /:/  /        /:/\ \  \     /:/\:\  \  
+  /::\  \ ___   /:/  \:\  \   /:/  /  ___   _\:\~\ \  \   /::\~\:\  \ 
+ /:/\:\  /\__\ /:/__/ \:\__\ /:/__/  /\__\ /\ \:\ \ \__\ /:/\:\ \:\__\
+ \/__\:\/:/  / \:\  \ /:/  / \:\  \ /:/  / \:\ \:\ \/__/ \:\~\:\ \/__/
+      \::/  /   \:\  /:/  /   \:\  /:/  /   \:\ \:\__\    \:\ \:\__\  
+      /:/  /     \:\/:/  /     \:\/:/  /     \:\/:/  /     \:\ \/__/  
+     /:/  /       \::/  /       \::/  /       \::/  /       \:\__\    
+     \/__/         \/__/         \/__/         \/__/         \/__/    
+
+
+http://www.alleyhouseestudio.com
+
+
+
+
+My simplistic attempts at
+												  
+	  _|_|      _|_|      _|_|_|    _|_|_|    _|_|_|  
+	_|    _|  _|    _|  _|        _|        _|        
+	_|    _|  _|    _|  _|          _|_|      _|_|    
+	_|    _|  _|    _|  _|              _|        _|  
+	  _|_|      _|_|      _|_|_|  _|_|_|    _|_|_|   
+			  
+breaking from that model for where need be.
+                                                 
+    
+    
+
+  /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \__
+ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \_
+/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \__
+\ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / _
+ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ / 
+ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \_
+/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \__
+\ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / _
+ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ / 
+ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \_
+/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \__
+
+
+		
+
+		** Dependencies: Pure CSS (responsive rollup) http://purecss.io/
+		
+
+\ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / _
+ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ / 
+ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \_
+/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \__
+\ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / _
+ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ / 
+ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \_
+/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \__
+\ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / _
+ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ /  \ \____/ / 
+ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \__/ / __ \ \_
+
+
+
+                _       _     _           
+__   ____ _ _ __(_) __ _| |__ | | ___  ___ 
+\ \ / / _` | '__| |/ _` | '_ \| |/ _ \/ __|
+ \ V / (_| | |  | | (_| | |_) | |  __/\__ \
+  \_/ \__,_|_|  |_|\__,_|_.__/|_|\___||___/
+
+*/
+
+
+
+$font-stack: "Dosis","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$primary-dark: #222;
+$primary-light: #fff;
+$mid-tone: #666;
+$mid-light: #ddd;
+$highlight: orange;
+$base-size: 16px;
+$reader-size: 1.25em;
+
+$mobile-break: 30em;
+$tablet-break: 48em;
+$desktop-break: 81.25em;
+
+/*
+
+ _                            _       
+(_)_ __ ___  _ __   ___  _ __| |_ ___ 
+| | '_ ` _ \| '_ \ / _ \| '__| __/ __|
+| | | | | | | |_) | (_) | |  | |_\__ \
+|_|_| |_| |_| .__/ \___/|_|   \__|___/
+            |_|                       
+*/
+
+
+@import 'border';
+@import 'dark';
+@import 'debug';
+@import 'menu';
+@import 'mp';
+@import 'positioners';
+@import 'queries';
+@import 'text';
+@import 'zs';
+
+
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+html, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+	font-family: $font-stack;
+}
+
+::selection {
+  background: $highlight;
+  color: $primary-light;
+}
+::-moz-selection {
+  background: $highlight;
+  color: $primary-light;
+}
+
+body{
+	color: $primary-dark;
+}
+a {
+  color: $primary-dark;
+}
+
+a:hover {
+  background: $highlight;
+}
+
+.link-on-dark {
+  color: $primary-light;
+}
+
+.link-no-decor {
+  text-decoration: none;
+}
+
+
+.pure-g > div {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.layout {
+  min-height: 100%;
+  position: relative;
+  background: lighten($primary-dark,80%);
+}
+
+
+
+.reader {
+  max-width: 400px;
+  background: $primary-light;
+}
+
+.pure-form > label {
+  padding-top: 2em;
+}
+
+.annotation {
+  color: red;
+  font-family: "Comic Sans MS";
+}
+
+
+.brand-title {
+	@extend .no-margin; 
+	font-size: 2.3em; 
+}
+
+.conditional-on {
+  display: none;
+}
+
+.question {
+  margin-bottom: 4em;
+}
+
+
+
+fieldset.contact {
+  .question {
+    display: none;
+    margin-left: 2em;
+
+    &.initial {
+      display: block;
+      margin-left: 0;
+    }
+  }
+}
+
+
+.status-date-group {
+  table {
+
+    td {
+      padding: 1em;
+    }
+
+  }
+  .status-date {
+    border-bottom: 1px solid gray;
+  }
+
+  a {
+    display: inline-block;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    color: white;
+    font-size: 1.5em;
+    text-decoration: none;
+    margin-left: 3em;
+
+    &.status-date-remove {
+      background: red;
+    }
+
+    &.status-date-add {
+      background: teal;
+    }
+  }
+}
+
+label {
+  font-weight: bold;
+}
+
+.menu-wrap {
+  padding: 0 4em;
+  border-bottom: 1px solid gray;
+}
+
+.switch {
+  
+
+  input {
+    display: none;
+    
+    // add default box-sizing for this scope
+    &,
+    &:after,
+    &:before,
+    & *,
+    & *:after,
+    & *:before,
+    & + .toggle {
+      box-sizing: border-box;
+      &::selection {
+        background: none;
+      }
+    }
+    
+    + .toggle {
+      outline: 0;
+      display: block;
+      width: 4em;
+      height: 2em;
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+      &:after,
+      &:before {
+        position: relative;
+        display: block;
+        content: "";
+        width: 50%;
+        height: 100%;
+      }
+      
+      &:after {
+        left: 0;
+      }
+      
+      &:before {
+        display: none;
+      }
+    }
+    
+    &:checked + .toggle:after {
+      left: 50%;
+    }
+
+    + .toggle {
+      background: #f0f0f0;
+      border-radius: 2em;
+      padding: 2px;
+      transition: all .4s ease;
+      &:after {
+        border-radius: 50%;
+        background: #fff;
+        transition: all .2s ease;
+      }
+    }
+    
+    &:checked + .toggle {
+      background: #9FD6AE;
+    }
+  }
+  
+} 
+
+.toggle {
+  display: block;
+  margin: 10px auto !important;
+}
+
+
+.form-section {
+  &.open {
+  }
+}
+
+
+.section-heading {
+  margin-top: 3em;
+  font-size: 1.8em;
+  cursor: pointer;
+  &:after {
+    content: '\25BC';
+    font-size: .8em;
+    margin-left: 1em;
+
+  }
+}
+
+.section-questions {
+  display: none;
+}
+

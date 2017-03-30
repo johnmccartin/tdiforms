@@ -1,0 +1,352 @@
+extends layout
+
+block content
+	h1 Edit Parcel
+
+	form.pure-form.pure-form-stacked
+		fieldset
+			.question
+				label(for="feature_name").control-label Enter the address
+				input(type="text" name="feature_name" value=" 123 Shirely Ave.").pure-input-1.feature-name-input
+
+			.form-section
+				h3.section-heading Attributes
+
+
+				.section-questions
+
+					.question
+						label(for="ownership_type") What kind of entity owns this parcel?
+						.status-date-group
+							table(data-statuses="ownership-type" id="ownership_type")
+								tr.status-date-row
+									td
+										span.status-date.status-date-existing Example status
+									td
+										span 2017-03
+									td
+										a(href='#').status-date-remove X
+								tr 
+								tr.status-date-add-row
+									td
+										span.status-date.status-date-add-new Add a new status
+									td
+									td
+										a(href='#').status-date-add +
+
+
+					.question
+						label(for="is_owner_engaged") Is the owner of this parcel engaged with the TDI program or other community activities?
+						.status-date-group
+							table(data-statuses="boolean" id="is_owner_engaged")
+								tr.status-date-row
+									td
+										span.status-date.status-date-existing Example status
+									td
+										span 2016-10
+									td
+										a(href='#').status-date-remove X
+								tr 
+								tr.status-date-add-row
+									td
+										span.status-date.status-date-add-new Add a new status
+									td
+									td
+										a(href='#').status-date-add +
+
+					.question
+						label(for="is_for_sale") Is this parcel for sale?
+						.status-date-group
+							table(data-statuses="boolean" id="is_for_sale")
+								tr.status-date-row
+									td
+										span.status-date.status-date-existing Yes
+									td
+										span 2017-01
+									td
+										a(href='#').status-date-remove X
+								tr 
+								tr.status-date-add-row
+									td
+										span.status-date.status-date-add-new Add a new status
+									td
+									td
+										a(href='#').status-date-add +
+
+					.question
+						label(for="is_for_lease") Is this parcel for lease?
+						.status-date-group
+							table(data-statuses="boolean" id="is_for_lease")
+								tr.status-date-row
+									td
+										span.status-date.status-date-existing No
+									td
+										span 2012-01
+									td
+										a(href='#').status-date-remove X
+								tr 
+								tr.status-date-add-row
+									td
+										span.status-date.status-date-add-new Add a new status
+									td
+									td
+										a(href='#').status-date-add +
+
+
+
+					.question
+						label(for="is_vacant_lot") Is this parcel a vacant lot (i.e., it has no structures on it)?
+						.status-date-group
+							table(data-statuses="boolean" id="is_vacant_lot")
+								tr.status-date-row
+									td
+										span.status-date.status-date-existing No
+									td
+										span 2014-01
+									td
+										a(href='#').status-date-remove X
+								tr 
+								tr.status-date-add-row
+									td
+										span.status-date.status-date-add-new Add a new status
+									td
+									td
+										a(href='#').status-date-add +
+
+
+					.question
+						label(for="ground_floor_vacancy") Is the ground floor of this parcel's building(s) vacant?
+						.status-date-group
+							table(data-statuses="vacancy-gradient" id="ground_floor_vacancy")
+								tr.status-date-row
+									td
+										span.status-date.status-date-existing Entirely Vacant
+									td
+										span 2014-01
+									td
+										a(href='#').status-date-remove X
+								tr 
+								tr.status-date-add-row
+									td
+										span.status-date.status-date-add-new Add a new status
+									td
+									td
+										a(href='#').status-date-add +
+				
+					.question
+						label(for="upper_floor_vacancy") Are the upper floors of this parcel's building(s) vacant?
+						.status-date-group
+							table(data-statuses="vacancy-gradient" id="upper_floor_vacancy")
+								tr.status-date-row
+									td
+										span.status-date.status-date-existing Partially
+									td
+										span 2014-01
+									td
+										a(href='#').status-date-remove X
+								tr 
+								tr.status-date-add-row
+									td
+										span.status-date.status-date-add-new Add a new status
+									td
+									td
+										a(href='#').status-date-add +
+
+
+
+			.form-section
+				h3.section-heading Assessing Info
+
+				.section-questions
+					.question
+						label Parcel ID
+						input(type="text" value="01D-7365").pure-input-1
+
+					.question
+						label Land Use
+						select
+							option Residential
+							option(selected) Commercial
+							option Mixed Use
+							option Institutional
+							option Industrial
+							option Open Space
+							option Other
+
+
+			//
+				.form-section
+					h3.section-heading Documents and Links
+					.section-questions
+						.question
+							label(for="featured_photo") Add an illustrative photo of this investment
+							input(type="file" name="featured_photo")
+
+						.question
+							label(for="pub_docs") Add any related documents. These are publicly visible.
+							input(type="file" name="pub_docs" multiple)
+
+						.question
+							label(for="priv_docs") Add any related documents. These are not publicly visible.
+							input(type="file" name="priv_docs" multiple)
+
+						.quesiton
+							label(for="related_link_url") Enter the URL for any related website.
+							input(type="text" name="related_link_url").pure-input-1
+
+						.quesiton
+							label(for="related_link_title") Enter a label for this related website.
+							input(type="text" name="related_link_title").pure-input-1
+		
+		
+				.form-section
+					h3.section-heading Related Features and Investments
+					
+					.section-questions
+						.question
+							span.annotation This will be type-ahead form like in Matt's mockup
+							label Search for and select any features related to this investment.
+							input(type="text").pure-input-1
+
+						.question
+							span.annotation This will be type-ahead form like in Matt's mockup
+							label Search for and select any investments related to this investment.
+							input(type="text").pure-input-1
+
+						.question
+							label Explain how these features and/or investments are related to this feature.
+							textarea.pure-input-1
+
+
+			.form-section
+				h3.section-heading Contacts
+
+				.section-questions
+					fieldset.contact.owner-contact
+						.question.initial
+							label Owner Contact Name
+							input(type="text" value="Joe Smith").pure-input-1
+
+						.question
+							label Owner Contact Organziation
+							input(type="text" value="").pure-input-1
+
+						.question
+							label Owner Contact Role
+							input(type="text" value="").pure-input-1
+
+						.question
+							label Owner Contact Phone Number
+							input(type="tel" value="").pure-input-1
+
+						.question
+							label Owner Contact Email
+							input(type="email" value="").pure-input-1
+
+						.question
+							label Owner Contact Website
+							input(type="text" value="").pure-input-1
+
+					fieldset.contact.priv-contact
+						.question.initial
+							label Private Contact Name
+							input(type="text").pure-input-1
+
+						.question
+							label Private Contact Organziation
+							input(type="text").pure-input-1
+
+						.question
+							label Private Contact Role
+							input(type="text").pure-input-1
+
+						.question
+							label Private Contact Phone Number
+							input(type="tel").pure-input-1
+
+						.question
+							label Private Contact Email
+							input(type="email").pure-input-1
+
+						.question
+							label Private Contact Website
+							input(type="text").pure-input-1
+
+					fieldset.contact.public-contact-1
+						.question.initial
+							label Public Contact 1 Name
+							input(type="text").pure-input-1
+
+						.question
+							label Public Contact 1 Organziation
+							input(type="text").pure-input-1
+
+						.question
+							label Public Contact 1 Role
+							input(type="text").pure-input-1
+
+						.question
+							label Public Contact 1 Phone Number
+							input(type="tel").pure-input-1
+
+						.question
+							label Public Contact 1 Email
+							input(type="email").pure-input-1
+
+						.question
+							label Public Contact 1 Website
+							input(type="text").pure-input-1
+
+					fieldset.contact.public-contact-2
+						.question.initial
+							label Public Contact 2 Name
+							input(type="text").pure-input-1
+
+						.question
+							label Public Contact 2 Organziation
+							input(type="text").pure-input-1
+
+						.question
+							label Public Contact 2 Role
+							input(type="text").pure-input-1
+
+						.question
+							label Public Contact 2 Phone Number
+							input(type="tel").pure-input-1
+
+						.question
+							label Public Contact 2 Email
+							input(type="email").pure-input-1
+
+						.question
+							label Public Contact 2 Website
+							input(type="text").pure-input-1
+
+			.form-section
+				h3.section-heading Call to Action
+
+				.section-questions
+					.question
+						label Write new Call to Action text if you wish to override the default text for this investment.
+						input(type="text").pure-input-1
+
+					.question
+						label Select the contact revealed when a user clicks this investment's Call to Action button.
+						select
+							option(selected) District Contact
+							option Public Contact 1
+							option Public Contact 2
+			.form-section
+				h3.section-heading Notes
+
+				.section-questions
+					.question
+						label Other notes (publicly visible).
+						textarea.pure-input-1
+
+					.question
+						label Other notes (not publicly visible).
+						textarea.pure-input-1
+
+		button(type="submit").pure-button.pure-button-primary Save
+

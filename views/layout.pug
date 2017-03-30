@@ -1,0 +1,35 @@
+doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet',href='https://unpkg.com/purecss@0.6.2/build/pure-min.css')
+		link(rel='stylesheet',href='https://fonts.googleapis.com/css?family=Dosis')
+		link(rel='stylesheet',href='/stylesheets/style.css')
+	body
+		.layout.pure-g
+			.pure-u-1
+				.reader.centered.menu-wrap
+					.annotation
+						//p This menu is for this internal test only.
+					.pure-menu.pure-menu-horizontal
+						ul.pure-menu-list
+							li.pure-menu-item.padding-1
+								a(href="/") Add Point
+
+
+							li.pure-menu-item.padding-1 
+								a(href="/edit-parcel") Edit Parcel
+							
+							li.pure-menu-item.padding-1 
+								a(href="/add-investment") Add Investment Old
+
+
+							li.pure-menu-item.padding-1
+								a(href="/add-feature") Add Feature Old
+
+			.pure-u-1
+				.reader.centered.padding-4
+					block content
+	
+	script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+	script(src="/javascripts/main.js")
