@@ -819,3 +819,19 @@ label {
 .section-questions {
   display: none;
 }
+
+/* line 375, ../sass/style.scss */
+.block {
+  display: block;
+}
+
+/* line 379, ../sass/style.scss */
+.inline-block {
+  display: inline-block;
+}
+
+/* line 383, ../sass/style.scss */
+.add-another-investment {
+  font-size: 1.5em;
+  padding: .5em;
+}

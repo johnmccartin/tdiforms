@@ -1,3 +1,5 @@
+var $fire = {}
+
 $(document).ready(function(){
 
 	init_conditionals();
@@ -5,47 +7,58 @@ $(document).ready(function(){
 	add_new_status();
 	delete_status();
 	accordian_sections();
+	another_investment();
+
+	$fire.investment_questions = $('.investment-info-questions').html();
 
 	
 
 	$('select.creates-conditional').on('change',function(){
-		console.log('select change')
+		//console.log('select change')
 
 		var $t = $(this);
 		var name = $t.attr('name');
 		var val = $t.val()
-		console.log(val)
+		//console.log(val)
 
 		var $conditional_on = $(document).find('*[data-conditional-on="'+name+'"]');
 		var $meets_condition = $conditional_on.filter('*[data-conditional-value="'+val+'"]')
-		console.log($meets_condition)
+		//console.log($meets_condition)
 
 		$conditional_on.slideUp();
 		$meets_condition.slideDown();
 	})
 
 	$(document).on('change','input.creates-conditional',function(){
-		console.log('input change')
+		//console.log('input change')
 		var $t = $(this);
 		var name = $t.attr('name');
 		var val;
 		if(this.checked) {
-			val = 'on'
+			val = 'true'
 		} else if(!this.checked) {
-			val = 'off'
+			val = 'false'
 		}
 
-		console.log('val: '+val)
+		//console.log('val: '+val)
 
 		var $conditional_on = $(document).find('*[data-conditional-on="'+name+'"]');
-		console.log($conditional_on.length)
+		//console.log($conditional_on.length)
 		var $meets_condition = $conditional_on.filter('*[data-conditional-value="'+val+'"]')
-		console.log($meets_condition.length)
+		var $meets_condition_children = $meets_condition.find('.section-questions');
+
+
+		//console.log($meets_condition.length)
 
 		//console.log($conditional_on.attr('data-conditional-value'))
 
 		$conditional_on.slideUp();
 		$meets_condition.slideDown();
+		if ($meets_condition_children.length > 0) {
+			$meets_condition_children.slideDown();
+		}
+
+
 	})
 
 
@@ -60,6 +73,14 @@ function init_conditionals() {
 		var $t = $(this)
 		var condition_name = $t.attr('name')
 		var current_value = $t.val()
+
+		if (this.checked) {
+			current_value = true
+		} else {
+			current_value = false
+		}
+
+		console.log(condition_name,current_value)
 
 
 		var $target_field = $conditional_on.filter('*[data-conditional-on="'+condition_name+'"][data-conditional-value="'+current_value+'"]')
@@ -85,10 +106,10 @@ function contact_reveal_fields() {
 			var $t = $(this)
 			var $input = $t.find('input')
 			var $fieldset = $t.parents('.contact')
-			console.log('hi')
+			//console.log('hi')
 
 			if ($input.val() != '') {
-				console.log('yo')
+				//console.log('yo')
 				$fieldset.find('.question').slideDown()
 			}
 		})
@@ -115,7 +136,7 @@ function contact_reveal_fields() {
 function add_new_status() {
 
 	$(document).on('click','a.status-date-add',function(e){
-		console.log('clicked')
+		//console.log('clicked')
 		e.preventDefault();
 		
 		var $t = $(this);
@@ -147,7 +168,7 @@ function add_new_status() {
 		]
 
 		var status_type = $table.attr('data-statuses');
-		console.log(status_type)
+		//console.log(status_type)
 		var status_select;
 
 		for (var i = 0; i < status_selects.length; i++) {
@@ -169,7 +190,7 @@ function add_new_status() {
 
 function delete_status() {
 	$(document).on('click','a.status-date-remove',function(e){
-		console.log('clicked')
+		//console.log('clicked')
 		e.preventDefault();
 		
 		var $t = $(this);
@@ -222,5 +243,13 @@ function accordian_sections() {
 	})
 }
 
+
+function another_investment() {
+	$(document).on('click','.add-another-investment',function(e){
+		e.preventDefault();
+		$(this).parents('.section-questions').append($fire.investment_questions);
+		$(this).parent().html('<hr>');
+	})
+}
 
 

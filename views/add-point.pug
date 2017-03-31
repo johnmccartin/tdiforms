@@ -6,39 +6,133 @@ block content
 	form.pure-form.pure-form-stacked
 		fieldset
 			.question
-				label(for="feature_name").control-label Add point name
+				label(for="feature_name").control-label Point name
 				input(type="text" name="feature_name").pure-input-1.feature-name-input
 
-			.form-section
-				h3.section-heading Location
+			.question
+				fieldset(data-conditional-on="is_addressy" data-conditional-value="true").pure-group.address-inputs.conditional-on
+					label(for="street_address") Street Address
+					input(type="text" name="street_address" placeholder="Preloaded from dropped point." value="123 Main St (Preloaded from dropped point.)").pure-input-1.last-of-section
 
-				.question
-						fieldset(data-conditional-on="is_addressy" data-conditional-value="on").pure-group.address-inputs.conditional-on
-							label(for="street_number") Address Number
-							input(type="text" name="street_number").pure-input-1
+			.question
+				label.control-label Is this point locatable at a single address or small range of addresses?
+				.switch
+					input(type="checkbox" id="is_addressy" name="is_addressy" checked).creates-conditional
+					label(for="is_addressy").toggle.round
 
-							label(for="street_name") Street Name (no suffix)
-							input(type="text" name="street_name").pure-input-1
+			.question
+				fieldset(data-conditional-on="is_addressy" data-conditional-value="false").pure-group.non-address-inputs.conditional-on
+					label(for="non_address_location") Describe the location (street intersection, etc.)
+					input(type="text" name="non_address_location").pure-input-1.last-of-section
 
-							label(for="street_suffix") Street Suffix
-							input(type="text" name="street_suffix").pure-input-1.last-of-section
-				
-				.section-questions
+			.question
+				label.control-label Is this point an investment or associated with an investment?
+				.switch
+					input(type="checkbox" id="includes_investment_info" name="includes_investment_info").creates-conditional
+					label(for="includes_investment_info").toggle.round
+
+
+
+
+			.form-section(data-conditional-on="includes_investment_info" data-conditional-value="true").conditional-on
+				h3.section-heading Investment Attributes
+
+				.section-questions.investment-info-questions
+
 					.question
-						label.control-label Is this point locatable at a single address or small range of addresses?
+						label(for="investment_status") Add an open or close date as needed.
+						.status-date-group
+							table(data-statuses="investment-statuses" id="investment_status")
+								tr.status-date-row
+									td
+										span.status-date.status-date-existing Example status
+									td
+										span 2016-04
+									td
+										a(href='#').status-date-remove X
+								tr 
+								tr.status-date-add-row
+									td
+										span.status-date.status-date-add-new Add a new status
+									td
+									td
+										a(href='#').status-date-add +
+
+					.question
+							label(for="investment_type") Which type of investment is this?
+							select(name="investment_type")
+								option(selected disabled) Choose an Investment Type
+								option(value="Infrastructure") Infrastructure
+								option(value="Finance") Finance
+								option(value="Assitance") Assitance
+								option(value="Placemaking") Placemaking
+
+
+					.question
+						label(for="source_type") Select the source of funding for this project.
+						select(name="source_type").creates-conditional
+							option(selected disabled) Choose a Source Type
+							option(value="MassDevelopment") MassDevelopment
+							option(value="Public") Public
+							option(value="Private") Private
+
+					.question
+						fieldset(data-conditional-on="source_type" data-conditional-value="MassDevelopment").pure-group.address-inputs.conditional-on
+							p.annotation This will be type-ahead form
+							label(for="massdev_product") Product Name (MassDevelopment)
+							input(type="text" name="massdev_product").pure-input-1
+
+						fieldset(data-conditional-on="source_type" data-conditional-value="Public").pure-group.address-inputs.conditional-on
+							p.annotation This will be type-ahead form
+							label(for="public_product") Product Name (Public)
+							input(type="text" name="public_product").pure-input-1
+
+						fieldset(data-conditional-on="source_type" data-conditional-value="Private").pure-group.address-inputs.conditional-on
+							label(for="public_product") Product Name (Private)
+							input(type="text" name="public_product").pure-input-1
+
+					.question
+						label Is this investment influenced by the TDI program?
 						.switch
-							input(type="checkbox" id="is_addressy" name="is_addressy" checked).creates-conditional
-							label(for="is_addressy").toggle.round
+							input(type="checkbox" name="is_tdi_influenced" id="is_tdi_influenced")
+							label(for="is_tdi_influenced").toggle.round
+
+					.question
+						label Is the investment amount known or can it be estimated?
+						.switch
+							input(type="checkbox" name="is_amount_known" id="is_amount_known")
+							label(for="is_amount_known").toggle.round
+
+					.question
+						label Is this investment amount estimated?
+						.switch
+							input(type="checkbox" name="is_amount_estimated" id="is_amount_estimated" checked="checked").creates-conditional
+							label(for="is_amount_estimated").toggle.round
+
+					.question.conditional-on(data-conditional-on="is_amount_estimated" data-conditional-value="off")
+						label Enter the exact investment amount (numbers only).
+						input(name="exact_amount" type="number").pure-input-1
+
+					.question.conditional-on(data-conditional-on="is_amount_estimated" data-conditional-value="on")
+						label Enter an estimated investment amount.
+						input(name="estimated" type="text").pure-input-1
+
+					.question
+						label Can the investment amount be publicly shared?
+						.switch
+							input(type="checkbox" name="is_amount_public" id="is_amount_public" checked="checked")
+							label(for="is_amount_public").toggle.round
+
+					.question
+						lable Add another investment to this place?  
+						h4(style="text-align:center")
+							a(href='#').centered.inline-block.add-another-investment + Add another investment
+						
 					
-					
-					
-						fieldset(data-conditional-on="is_addressy" data-conditional-value="off").pure-group.non-address-inputs.conditional-on
-							label(for="non_address_location") Describe the location (street intersection, etc.)
-							input(type="text" name="non_address_location").pure-input-1.last-of-section
 
 			
 			.form-section
-				h3.section-heading Attributes
+				h3.section-heading Place Attributes
 
 				.section-questions
 					.question
@@ -50,8 +144,6 @@ block content
 							option(value="business") Business
 
 					.question
-						
-
 						fieldset(data-conditional-on="feature_type" data-conditional-value="food").pure-group.food-subtypes.conditional-on
 							label Select the feature sub-type
 							select

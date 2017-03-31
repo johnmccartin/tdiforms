@@ -3,11 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('add-point', { title: 'Add Feature' });
+  res.render('add-point', { title: 'Add Point' });
 });
 
 router.get('/add-investment', function(req, res, next) {
-  res.render('add-investment', { title: 'Add Investment' });
+  res.render('add-investment', { title: 'Add Investment Old' });
 });
 
 router.get('/edit-parcel', function(req, res, next) {
@@ -15,7 +15,7 @@ router.get('/edit-parcel', function(req, res, next) {
 });
 
 router.get('/add-feature', function(req, res, next) {
-  res.render('index', { title: 'Add Point' });
+  res.render('index', { title: 'Add Feature Old' });
 });
 
 module.exports = router;
