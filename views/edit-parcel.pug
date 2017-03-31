@@ -219,33 +219,9 @@ block content
 
 
 			.form-section
-				h3.section-heading Contacts
+				h3.section-heading Opportunities and Contacts
 
 				.section-questions
-					fieldset.contact.owner-contact
-						.question.initial
-							label Owner Contact Name
-							input(type="text" value="Joe Smith").pure-input-1
-
-						.question
-							label Owner Contact Organziation
-							input(type="text" value="").pure-input-1
-
-						.question
-							label Owner Contact Role
-							input(type="text" value="").pure-input-1
-
-						.question
-							label Owner Contact Phone Number
-							input(type="tel" value="").pure-input-1
-
-						.question
-							label Owner Contact Email
-							input(type="email" value="").pure-input-1
-
-						.question
-							label Owner Contact Website
-							input(type="text" value="").pure-input-1
 
 					fieldset.contact.priv-contact
 						.question.initial
@@ -272,70 +248,58 @@ block content
 							label Private Contact Website
 							input(type="text").pure-input-1
 
-					fieldset.contact.public-contact-1
+						.question
+							label Explain when to reach out to this person
+							input(type="text").pure-input-1
+
+						.question
+							a(href="#" data-contact-type="private").add-another-contact + Click to add another <b>private</b> contact 
+
+					fieldset.contact.public-contact
 						.question.initial
-							label Public Contact 1 Name
+							label Public Contact Name
 							input(type="text").pure-input-1
 
 						.question
-							label Public Contact 1 Organziation
+							label Public Contact Organziation
 							input(type="text").pure-input-1
 
 						.question
-							label Public Contact 1 Role
+							label Public Contact Role
 							input(type="text").pure-input-1
 
 						.question
-							label Public Contact 1 Phone Number
+							label Public Contact Phone Number
 							input(type="tel").pure-input-1
 
 						.question
-							label Public Contact 1 Email
+							label Public Contact Email
 							input(type="email").pure-input-1
 
 						.question
-							label Public Contact 1 Website
-							input(type="text").pure-input-1
-
-					fieldset.contact.public-contact-2
-						.question.initial
-							label Public Contact 2 Name
+							label Public Contact Website
 							input(type="text").pure-input-1
 
 						.question
-							label Public Contact 2 Organziation
+							label Explain when to reach out to this person
 							input(type="text").pure-input-1
 
 						.question
-							label Public Contact 2 Role
-							input(type="text").pure-input-1
-
-						.question
-							label Public Contact 2 Phone Number
-							input(type="tel").pure-input-1
-
-						.question
-							label Public Contact 2 Email
-							input(type="email").pure-input-1
-
-						.question
-							label Public Contact 2 Website
-							input(type="text").pure-input-1
-
-			.form-section
-				h3.section-heading Call to Action
-
-				.section-questions
-					.question
-						label Write new Call to Action text if you wish to override the default text for this investment.
-						input(type="text").pure-input-1
+							a(href="#" data-contact-type="public").add-another-contact + Click to add another <b>public</b> contact 
 
 					.question
-						label Select the contact revealed when a user clicks this investment's Call to Action button.
+						label Select the contact revealed when a user clicks to learn more
 						select
 							option(selected) District Contact
 							option Public Contact 1
 							option Public Contact 2
+							option Public Contact 3
+							option ... Names should populate from contact names
+
+					.question
+					label Write new learn more text if you wish to override the default text for this place.
+					input(type="text").pure-input-1
+					
 			.form-section
 				h3.section-heading Notes
 
