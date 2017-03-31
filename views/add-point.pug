@@ -134,16 +134,16 @@ block content
 
 				.section-questions
 					.question
-						label(for="feature_type") Select the feature type
-							span.annotation This test doesn't include all Feature types.
+						label(for="feature_type") Select the place type
+							span.annotation This test doesn't include all place types.
 						select(name="feature_type").creates-conditional
-							option(selected disabled) Choose a Feature Type
+							option(selected disabled) Choose a place type
 							option(value="food") Food
 							option(value="business") Business
 
 					.question
 						fieldset(data-conditional-on="feature_type" data-conditional-value="food").pure-group.food-subtypes.conditional-on
-							label Select the feature sub-type
+							label Select the place sub-type
 							select
 								option -
 								option Restaurant
@@ -152,7 +152,7 @@ block content
 								option Fast-food
 
 						fieldset(data-conditional-on="feature_type" data-conditional-value="business").pure-group.business-subtypes.conditional-on
-							label Select the feature sub-type
+							label Select the place sub-type
 							select
 								option -
 								option General Office
@@ -222,6 +222,7 @@ block content
 
 					.question
 						label Is this place a "collision point" for members of the community?
+						label.help-text A "collision point" is a place where community members run into eachother and informally share thoughts and ideas.
 						.switch
 							input(type="checkbox" name="is_collision_point" id="is_collision_point")
 							label(for="is_collision_point").toggle.round
@@ -234,22 +235,24 @@ block content
 				h3.section-heading Documents and Links
 				.section-questions
 					.question
-						label(for="featured_photo") Add an illustrative photo of this feature
+						label(for="featured_photo") Add an illustrative photo of this feature (jpg, png).
 						input(type="file" name="featured_photo")
 
 					.question
-						label(for="pub_docs") Add any related documents. These are publicly visible.
+						label(for="pub_docs") Add any related documents (pdf). These are publicly visible.
 						input(type="file" name="pub_docs" multiple)
+						span.annotation Real version should be multi-upload
 
 					.question
-						label(for="priv_docs") Add any related documents. These are not publicly visible.
+						label(for="priv_docs") Add any related documents (pdf). These are not publicly visible.
 						input(type="file" name="priv_docs" multiple)
+						span.annotation Real version should be multi-upload
 
-					.quesiton
+					.question
 						label(for="related_link_url") Enter the URL for any related website.
 						input(type="text" name="related_link_url").pure-input-1
 
-					.quesiton
+					.question
 						label(for="related_link_title") Enter a label for this related website.
 						input(type="text" name="related_link_title").pure-input-1
 
