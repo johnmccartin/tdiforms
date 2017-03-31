@@ -89,7 +89,14 @@ block content
 
 						fieldset(data-conditional-on="source_type" data-conditional-value="Private").pure-group.address-inputs.conditional-on
 							label(for="public_product") Product Name (Private)
-							input(type="text" name="public_product").pure-input-1
+							select(name="source_type")
+								option(selected disabled) Choose a Private Product
+								option Building Purchase
+								option Facade Improvement
+								option Building Rehab
+								option Interior Rehab
+								option New Lease
+								option Other Private Funds
 
 					.question
 						label Is this investment influenced by the TDI program?
@@ -98,25 +105,16 @@ block content
 							label(for="is_tdi_influenced").toggle.round
 
 					.question
-						label Is the investment amount known or can it be estimated?
+						label Enter the investment amount (numbers only).
+						input(name="exact_amount" type="number").pure-input-1
+
+
+					.question
+						label Toggle on if the exact amount is known. Toggle off if the amount is estimated.
 						.switch
 							input(type="checkbox" name="is_amount_known" id="is_amount_known")
 							label(for="is_amount_known").toggle.round
-
-					.question
-						label Is this investment amount estimated?
-						.switch
-							input(type="checkbox" name="is_amount_estimated" id="is_amount_estimated" checked="checked").creates-conditional
-							label(for="is_amount_estimated").toggle.round
-
-					.question.conditional-on(data-conditional-on="is_amount_estimated" data-conditional-value="off")
-						label Enter the exact investment amount (numbers only).
-						input(name="exact_amount" type="number").pure-input-1
-
-					.question.conditional-on(data-conditional-on="is_amount_estimated" data-conditional-value="on")
-						label Enter an estimated investment amount.
-						input(name="estimated" type="text").pure-input-1
-
+					
 					.question
 						label Can the investment amount be publicly shared?
 						.switch
@@ -186,25 +184,25 @@ block content
 
 
 					.question
-						label Is this feature an employer?
+						label Is this place an employer?
 						.switch
 							input(type="checkbox" name="is_employer" id="is_employer")
 							label(for="is_employer").toggle.round
 
 					.question
-						label Does this feature activate the street nearby?
+						label Does this place activate the street nearby?
 						.switch
 							input(type="checkbox" id="is_street_activating" name="is_street_activating")
 							label(for="is_street_activating").toggle.round
 
 					.question
-						label Does this feature contribute to the goals of the TDI program?
+						label Does this place contribute to the goals of the TDI program?
 						.switch
 							input(type="checkbox" name="is_tdi_assett" id="is_tdi_assett")
 							label(for="is_tdi_assett").toggle.round
 
 					.question
-						label Is the owner of this feature engaged with the TDI program or other community activities?
+						label Is the owner of this place engaged with the TDI program or other community activities?
 						.status-date-group
 							table(data-statuses="boolean" id="is_feature_owner_engaged")
 								tr.status-date-row
@@ -223,7 +221,7 @@ block content
 										a(href='#').status-date-add +
 
 					.question
-						label Is this feature a collision point for members of the community?
+						label Is this place a "collision point" for members of the community?
 						.switch
 							input(type="checkbox" name="is_collision_point" id="is_collision_point")
 							label(for="is_collision_point").toggle.round
@@ -276,9 +274,10 @@ block content
 
 
 			.form-section
-				h3.section-heading Contacts
+				h3.section-heading Opportunities and Contacts
 
 				.section-questions
+
 					fieldset.contact.priv-contact
 						.question.initial
 							label Private Contact Name
@@ -304,70 +303,59 @@ block content
 							label Private Contact Website
 							input(type="text").pure-input-1
 
-					fieldset.contact.public-contact-1
+						.question
+							label Explain when to reach out to this person
+							input(type="text").pure-input-1
+
+						.question
+							a(href="#" data-contact-type="private").add-another-contact + Click to add another <b>private</b> contact 
+
+					fieldset.contact.public-contact
 						.question.initial
-							label Public Contact 1 Name
+							label Public Contact Name
 							input(type="text").pure-input-1
 
 						.question
-							label Public Contact 1 Organziation
+							label Public Contact Organziation
 							input(type="text").pure-input-1
 
 						.question
-							label Public Contact 1 Role
+							label Public Contact Role
 							input(type="text").pure-input-1
 
 						.question
-							label Public Contact 1 Phone Number
+							label Public Contact Phone Number
 							input(type="tel").pure-input-1
 
 						.question
-							label Public Contact 1 Email
+							label Public Contact Email
 							input(type="email").pure-input-1
 
 						.question
-							label Public Contact 1 Website
-							input(type="text").pure-input-1
-
-					fieldset.contact.public-contact-2
-						.question.initial
-							label Public Contact 2 Name
+							label Public Contact Website
 							input(type="text").pure-input-1
 
 						.question
-							label Public Contact 2 Organziation
+							label Explain when to reach out to this person
 							input(type="text").pure-input-1
 
 						.question
-							label Public Contact 2 Role
-							input(type="text").pure-input-1
-
-						.question
-							label Public Contact 2 Phone Number
-							input(type="tel").pure-input-1
-
-						.question
-							label Public Contact 2 Email
-							input(type="email").pure-input-1
-
-						.question
-							label Public Contact 2 Website
-							input(type="text").pure-input-1
-
-			.form-section
-				h3.section-heading Call to Action
-
-				.section-questions
-					.question
-						label Write new Call to Action text if you wish to override the default text for this feature.
-						input(type="text").pure-input-1
+							a(href="#" data-contact-type="public").add-another-contact + Click to add another <b>public</b> contact 
 
 					.question
-						label Select the contact revealed when a user clicks this feature's Call to Action button.
+						label Select the contact revealed when a user clicks to learn more
 						select
 							option(selected) District Contact
 							option Public Contact 1
 							option Public Contact 2
+							option Public Contact 3
+							option ... Names should populate from contact names
+
+					.question
+					label Write new learn more text if you wish to override the default text for this place.
+					input(type="text").pure-input-1
+
+
 			.form-section
 				h3.section-heading Notes
 

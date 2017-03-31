@@ -8,8 +8,11 @@ $(document).ready(function(){
 	delete_status();
 	accordian_sections();
 	another_investment();
+	another_contact();
 
 	$fire.investment_questions = $('.investment-info-questions').html();
+	$fire.private_contact_questions = $('.priv-contact').html();
+	$fire.public_contact_questions = $('.public-contact').html();
 
 	
 
@@ -248,6 +251,27 @@ function another_investment() {
 	$(document).on('click','.add-another-investment',function(e){
 		e.preventDefault();
 		$(this).parents('.section-questions').append($fire.investment_questions);
+		$(this).parent().html('<hr>');
+	})
+}
+
+function another_contact() {
+	$(document).on('click','.add-another-contact',function(e){
+		console.log('another_contact');
+		e.preventDefault();
+
+		var contact_type = $(this).attr('data-contact-type');
+		console.log(contact_type);
+		var contact_html;
+		if( contact_type == 'private') {
+			contact_html = $fire.private_contact_questions
+		} else if  ( contact_type == 'public' ) {
+			contact_html = $fire.public_contact_questions
+		}
+
+
+
+		$(this).parents('.contact').append(contact_html).find('.question').slideDown();
 		$(this).parent().html('<hr>');
 	})
 }
