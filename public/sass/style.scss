@@ -105,7 +105,7 @@ $primary-light: #fff;
 $mid-tone: #666;
 $mid-light: #ddd;
 $highlight: orange;
-$base-size: 16px;
+$base-size: 10px;
 $reader-size: 1.25em;
 
 $mobile-break: 30em;
@@ -155,8 +155,12 @@ html, button, input, select, textarea,
   color: $primary-light;
 }
 
+.pointer {
+	cursor: pointer;
+}
 body{
 	color: $primary-dark;
+	font-size: $base-size;
 }
 a {
   color: $primary-dark;
@@ -276,6 +280,23 @@ label {
 }
 
 .switch {
+	text-align: center;
+
+	&:before, &:after {
+	    position: relative;
+	    top: -15px;
+	    margin: 0 25px 0 25px;
+}
+
+	&:before {
+		content: 'No';
+		display: inline;
+	}
+
+	&:after {
+		content: 'Yes';
+		display: inline;
+	}
   
 
   input {
@@ -297,7 +318,7 @@ label {
     
     + .toggle {
       outline: 0;
-      display: block;
+      display: inline-block;
       width: 4em;
       height: 2em;
       position: relative;
@@ -314,6 +335,7 @@ label {
       
       &:after {
         left: 0;
+        color: #9FD6AE;
       }
       
       &:before {
@@ -345,31 +367,40 @@ label {
 } 
 
 .toggle {
-  display: block;
-  margin: 10px auto !important;
+  //margin: 10px auto !important;
 }
 
 
 .form-section {
   &.open {
+  	.section-heading {
+  		&:after {
+		    content: '\25BC';
+  		}
+  	}
   }
+
+ 	.section-heading {
+		margin-top: 2.5em;
+		  font-size: 1.8em;
+		  cursor: pointer;
+		  &:after {
+		    content: '\25b6';
+		    font-size: .8em;
+		    margin-left: 1em;
+		}
+	}
 }
 
 
-.section-heading {
-  margin-top: 3em;
-  font-size: 1.8em;
-  cursor: pointer;
-  &:after {
-    content: '\25BC';
-    font-size: .8em;
-    margin-left: 1em;
 
-  }
-}
 
 .section-questions {
   display: none;
+}
+
+b {
+	font-style: italic;
 }
 
 .block {
@@ -388,4 +419,14 @@ label {
 .help-text {
   color: $mid-tone;
   font-size: .8em;
+}
+
+.secondary-question {
+	text-decoration: underline;
+	font-size: .8em;
+	color: $mid-tone;
+}
+
+.click-to-reveal {
+	display: none;
 }

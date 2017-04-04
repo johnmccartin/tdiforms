@@ -10,9 +10,31 @@ $(document).ready(function(){
 	another_investment();
 	another_contact();
 
+
+	$('.first-section .section-questions').show();
+
 	$fire.investment_questions = $('.investment-info-questions').html();
 	$fire.private_contact_questions = $('.priv-contact').html();
 	$fire.public_contact_questions = $('.public-contact').html();
+
+
+	$(document).on('click','.reveal-via',function(e) {
+		e.preventDefault();
+
+
+		var id = $(this).attr('id');
+		var $click_to_reveal = $('.click-to-reveal[data-reveal-via="'+id+'"]');
+		var $click_to_hide = $('.click-to-hide[data-hide-via="'+id+'"]');
+		$(this).text($(this).attr('data-alternate-text'));
+
+		//console.log($click_to_hide)
+
+		$click_to_reveal.slideDown().attr('data-visible',true);
+		$click_to_hide.slideUp().attr('data-visible',false);
+
+
+
+	})
 
 	
 
@@ -25,41 +47,105 @@ $(document).ready(function(){
 		//console.log(val)
 
 		var $conditional_on = $(document).find('*[data-conditional-on="'+name+'"]');
-		var $meets_condition = $conditional_on.filter('*[data-conditional-value="'+val+'"]')
-		//console.log($meets_condition)
 
-		$conditional_on.slideUp();
-		$meets_condition.slideDown();
+
+
+
+		var $meets_condition = $conditional_on.filter('*[data-conditional-value="'+val+'"]');
+		var $meets_condition_children = $meets_condition.find('.section-questions');
+		var $form_section = $meets_condition.parents('.form-section');
+		if ( $meets_condition.hasClass('form-section') ) {
+			$form_section = $meets_condition
+		}
+
+		$conditional_on.slideUp().attr('data-visible',false);
+		$meets_condition.slideDown().attr('data-visible',true);
+		$form_section.addClass('open');
+		if ($meets_condition_children.length > 0) {
+			$meets_condition_children.slideDown().attr('data-visible',true);
+		}
+
 	})
 
-	$(document).on('change','input.creates-conditional',function(){
-		//console.log('input change')
+	$(document).on('change','input.creates-conditional, .creates-conditional input:radio',function(){
 		var $t = $(this);
 		var name = $t.attr('name');
 		var val;
-		if(this.checked) {
+		if($(this).attr('type') == 'checkbox' && this.checked) {
 			val = 'true'
-		} else if(!this.checked) {
+		} else if($(this).attr('type') == 'checkbox' && !this.checked) {
 			val = 'false'
+		} else {
+			val = $(this).val();
 		}
-
-		//console.log('val: '+val)
+		//console.log(val)
 
 		var $conditional_on = $(document).find('*[data-conditional-on="'+name+'"]');
-		//console.log($conditional_on.length)
 		var $meets_condition = $conditional_on.filter('*[data-conditional-value="'+val+'"]')
 		var $meets_condition_children = $meets_condition.find('.section-questions');
-
-
-		//console.log($meets_condition.length)
-
-		//console.log($conditional_on.attr('data-conditional-value'))
+		var $form_section = $meets_condition.parents('.form-section');
+		if ( $meets_condition.hasClass('form-section') ) {
+			$form_section = $meets_condition
+		}
 
 		$conditional_on.slideUp();
 		$meets_condition.slideDown();
+		$form_section.addClass('open');
 		if ($meets_condition_children.length > 0) {
 			$meets_condition_children.slideDown();
 		}
+
+
+	})
+
+	$(document).on('change','input.creates-conditional-follows, .creates-conditional-follows input:radio',function(){
+		console.log('follows')
+		var $t = $(this);
+		var name = $t.attr('name');
+		var $parent_section = $t.parents('.form-section')
+		var val;
+		if($(this).attr('type') == 'checkbox' && this.checked) {
+			val = 'true'
+		} else if($(this).attr('type') == 'checkbox' && !this.checked) {
+			val = 'false'
+		} else {
+			val = $(this).val();
+		}
+		//console.log(val)
+
+		var $conditional_on = $(document).find('.form-section[data-conditional-follows-on="'+name+'"]');
+		var $meets_condition = $conditional_on.filter('.form-section[data-conditional-follows-value="'+val+'"]');
+		var $meets_condition_children = $meets_condition.find('.section-questions');
+		console.log($meets_condition)
+
+		$meets_condition.prependTo('.place-here').addClass('open');
+		if ($meets_condition_children.length > 0) {
+			$meets_condition_children.slideDown();
+		}
+
+
+		//$meets_condition.after($('.follow-me')).appendTo('form');
+
+		/*
+		var $meets_condition_children = $meets_condition.find('.section-questions');
+		
+		var $form_section = $meets_condition.parents('.form-section');
+		if ( $meets_condition.hasClass('form-section') ) {
+			$form_section = $meets_condition
+		}
+		*/
+
+
+
+
+		/*
+		$conditional_on.slideUp();
+		$meets_condition.slideDown();
+		$form_section.addClass('open');
+		if ($meets_condition_children.length > 0) {
+			$meets_condition_children.slideDown();
+		}
+		*/
 
 
 	})
@@ -87,7 +173,7 @@ function init_conditionals() {
 
 
 		var $target_field = $conditional_on.filter('*[data-conditional-on="'+condition_name+'"][data-conditional-value="'+current_value+'"]')
-		$target_field.show();
+		$target_field.show().attr('data-visible',true);
 
 	})
 
@@ -214,9 +300,10 @@ function delete_status() {
 
 function accordian_sections() {
 	$(document).on('click','.section-heading', function() {
+		console.log('click')
 		var $t = $(this)
 		var $section = $t.parents('.form-section')
-		var $questions = $section.find('.section-questions')
+		var $questions = $section.find('.section-questions[data-visible="'+true+'"]')
 
 		if ( $section.hasClass('open') ) {
 			$questions.slideUp()
@@ -228,6 +315,9 @@ function accordian_sections() {
 		}
 
 	});
+
+
+
 
 	$(document).on('input','.last-of-section',function() {
 		var $t = $(this)
@@ -245,6 +335,12 @@ function accordian_sections() {
 		$next_section.addClass('open').find('.section-questions').slideDown();
 	})
 }
+
+
+
+
+
+
 
 
 function another_investment() {
@@ -276,4 +372,37 @@ function another_contact() {
 	})
 }
 
+
+//worked around this. ignore
+function checkConditional(input) {
+	console.log('rawtype: '+typeof input)
+	//console.log('raw: '+input)
+	input = JSON.parse(input)
+
+	if (typeof input == 'string') {
+		console.log('do something to string')
+	} else if ($.isArray(input) == true) {
+		console.log('do something to array')
+	}
+
+	var $conditionals = $('.conditional-on')
+	$conditionals.each(function(i){
+
+		var conditional_on = $(this).attr('data-conditional-on');
+
+	});
+
+
+}
+
+$.fn.moveUp = function() {
+    $.each(this, function() {
+         $(this).after($(this).prev());   
+    });
+};
+$.fn.moveDown = function() {
+    $.each(this, function() {
+         $(this).before($(this).next());   
+    });
+};
 

@@ -1,0 +1,375 @@
+extends layout
+
+block content
+	h1 Add Point
+
+	form.pure-form.pure-form-stacked
+		fieldset
+			.question
+				label(for="feature_name").control-label Point name
+				input(type="text" name="feature_name").pure-input-1.feature-name-input
+
+			.question
+				fieldset(data-conditional-on="is_addressy" data-conditional-value="true").pure-group.address-inputs.conditional-on
+					label(for="street_address") Street Address
+					input(type="text" name="street_address" placeholder="Preloaded from dropped point." value="123 Main St (Preloaded from dropped point.)").pure-input-1.last-of-section
+
+			.question
+				label.control-label Is this point locatable at a single address or small range of addresses?
+				.switch
+					input(type="checkbox" id="is_addressy" name="is_addressy" checked).creates-conditional
+					label(for="is_addressy").toggle.round
+
+			.question
+				fieldset(data-conditional-on="is_addressy" data-conditional-value="false").pure-group.non-address-inputs.conditional-on
+					label(for="non_address_location") Describe the location (street intersection, etc.)
+					input(type="text" name="non_address_location").pure-input-1.last-of-section
+
+			.question
+				label.control-label Is this point an investment or associated with an investment?
+				.switch
+					input(type="checkbox" id="includes_investment_info" name="includes_investment_info").creates-conditional
+					label(for="includes_investment_info").toggle.round
+
+
+
+
+			.form-section(data-conditional-on="includes_investment_info" data-conditional-value="true").conditional-on
+				h3.section-heading Investment Attributes
+
+				.section-questions.investment-info-questions
+
+					.question
+						label(for="investment_status") Add an open or close date as needed.
+						.status-date-group
+							table(data-statuses="investment-statuses" id="investment_status")
+								tr.status-date-row
+									td
+										span.status-date.status-date-existing Example status
+									td
+										span 2016-04
+									td
+										a(href='#').status-date-remove X
+								tr 
+								tr.status-date-add-row
+									td
+										span.status-date.status-date-add-new Add a new status
+									td
+									td
+										a(href='#').status-date-add +
+
+					.question
+							label(for="investment_type") Which type of investment is this?
+							select(name="investment_type")
+								option(selected disabled) Choose an Investment Type
+								option(value="Infrastructure") Infrastructure
+								option(value="Finance") Finance
+								option(value="Assitance") Assitance
+								option(value="Placemaking") Placemaking
+
+
+					.question
+						label(for="source_type") Select the source of funding for this project.
+						select(name="source_type").creates-conditional
+							option(selected disabled) Choose a Source Type
+							option(value="MassDevelopment") MassDevelopment
+							option(value="Public") Public
+							option(value="Private") Private
+
+					.question
+						fieldset(data-conditional-on="source_type" data-conditional-value="MassDevelopment").pure-group.address-inputs.conditional-on
+							p.annotation This will be type-ahead form
+							label(for="massdev_product") Product Name (MassDevelopment)
+							input(type="text" name="massdev_product").pure-input-1
+
+						fieldset(data-conditional-on="source_type" data-conditional-value="Public").pure-group.address-inputs.conditional-on
+							p.annotation This will be type-ahead form
+							label(for="public_product") Product Name (Public)
+							input(type="text" name="public_product").pure-input-1
+
+						fieldset(data-conditional-on="source_type" data-conditional-value="Private").pure-group.address-inputs.conditional-on
+							label(for="public_product") Product Name (Private)
+							select(name="source_type")
+								option(selected disabled) Choose a Private Product
+								option Building Purchase
+								option Facade Improvement
+								option Building Rehab
+								option Interior Rehab
+								option New Lease
+								option Other Private Funds
+
+					.question
+						label Is this investment influenced by the TDI program?
+						.switch
+							input(type="checkbox" name="is_tdi_influenced" id="is_tdi_influenced")
+							label(for="is_tdi_influenced").toggle.round
+
+					.question
+						label Enter the investment amount (numbers only).
+						input(name="exact_amount" type="number").pure-input-1
+
+
+					.question
+						label Toggle on if the exact amount is known. Toggle off if the amount is estimated.
+						.switch
+							input(type="checkbox" name="is_amount_known" id="is_amount_known")
+							label(for="is_amount_known").toggle.round
+					
+					.question
+						label Can the investment amount be publicly shared?
+						.switch
+							input(type="checkbox" name="is_amount_public" id="is_amount_public" checked="checked")
+							label(for="is_amount_public").toggle.round
+
+					.question
+						lable Add another investment to this place?  
+						h4(style="text-align:center")
+							a(href='#').centered.inline-block.add-another-investment + Add another investment
+						
+					
+
+			
+			.form-section
+				h3.section-heading Place Attributes
+
+				.section-questions
+					.question
+						label(for="feature_type") Select the place type
+							span.annotation This test doesn't include all place types.
+						select(name="feature_type").creates-conditional
+							option(selected disabled) Choose a place type
+							option(value="food") Food
+							option(value="business") Business
+
+					.question
+						fieldset(data-conditional-on="feature_type" data-conditional-value="food").pure-group.food-subtypes.conditional-on
+							label Select the place sub-type
+							select
+								option -
+								option Restaurant
+								option Cafe
+								option Grocer
+								option Fast-food
+
+						fieldset(data-conditional-on="feature_type" data-conditional-value="business").pure-group.business-subtypes.conditional-on
+							label Select the place sub-type
+							select
+								option -
+								option General Office
+								option General Industrial
+								option Bank
+								option Corporate Headquarters
+								option Co-working
+
+
+					.question
+						label(for="open_close_status") Add an open or close date as needed.
+						.status-date-group
+							table(data-statuses="open-close" id="open_close_status")
+								tr.status-date-row
+									td
+										span.status-date.status-date-existing Example status
+									td
+										span 2017-01
+									td
+										a(href='#').status-date-remove X
+								tr 
+								tr.status-date-add-row
+									td
+										span.status-date.status-date-add-new Add a new status
+									td
+									td
+										a(href='#').status-date-add +
+
+
+
+					.question
+						label Is this place an employer?
+						.switch
+							input(type="checkbox" name="is_employer" id="is_employer")
+							label(for="is_employer").toggle.round
+
+					.question
+						label Does this place activate the street nearby?
+						.switch
+							input(type="checkbox" id="is_street_activating" name="is_street_activating")
+							label(for="is_street_activating").toggle.round
+
+					.question
+						label Does this place contribute to the goals of the TDI program?
+						.switch
+							input(type="checkbox" name="is_tdi_assett" id="is_tdi_assett")
+							label(for="is_tdi_assett").toggle.round
+
+					.question
+						label Is the owner of this place engaged with the TDI program or other community activities?
+						.status-date-group
+							table(data-statuses="boolean" id="is_feature_owner_engaged")
+								tr.status-date-row
+									td
+										span.status-date.status-date-existing Example status
+									td
+										span 2017-01
+									td
+										a(href='#').status-date-remove X
+								tr 
+								tr.status-date-add-row
+									td
+										span.status-date.status-date-add-new Add a new status
+									td
+									td
+										a(href='#').status-date-add +
+
+					.question
+						label Is this place a "collision point" for members of the community?
+						label.help-text A "collision point" is a place where community members run into eachother and informally share thoughts and ideas.
+						.switch
+							input(type="checkbox" name="is_collision_point" id="is_collision_point")
+							label(for="is_collision_point").toggle.round
+			
+			
+
+
+
+			.form-section
+				h3.section-heading Documents and Links
+				.section-questions
+					.question
+						label(for="featured_photo") Add an illustrative photo of this feature (jpg, png).
+						input(type="file" name="featured_photo")
+
+					.question
+						label(for="pub_docs") Add any related documents (pdf). These are publicly visible.
+						input(type="file" name="pub_docs" multiple)
+						span.annotation Real version should be multi-upload
+
+					.question
+						label(for="priv_docs") Add any related documents (pdf). These are not publicly visible.
+						input(type="file" name="priv_docs" multiple)
+						span.annotation Real version should be multi-upload
+
+					.question
+						label(for="related_link_url") Enter the URL for any related website.
+						input(type="text" name="related_link_url").pure-input-1
+
+					.question
+						label(for="related_link_title") Enter a label for this related website.
+						input(type="text" name="related_link_title").pure-input-1
+
+
+			.form-section
+				h3.section-heading Related Features and Investments
+				
+				.section-questions
+					.question
+						span.annotation This will be type-ahead forms like in Matt's mockup
+						label Search for and select any features related to this feature.
+						input(type="text").pure-input-1
+
+					.question
+						span.annotation This will be type-ahead forms like in Matt's mockup
+						label Search for and select any investments related to this feature.
+						input(type="text").pure-input-1
+
+					.question
+						label Explain how these features and/or investments are related to this feature.
+						textarea.pure-input-1
+
+
+			.form-section
+				h3.section-heading Opportunities and Contacts
+
+				.section-questions
+
+					fieldset.contact.priv-contact
+						.question.initial
+							label Private Contact Name
+							input(type="text").pure-input-1
+
+						.question
+							label Private Contact Organziation
+							input(type="text").pure-input-1
+
+						.question
+							label Private Contact Role
+							input(type="text").pure-input-1
+
+						.question
+							label Private Contact Phone Number
+							input(type="tel").pure-input-1
+
+						.question
+							label Private Contact Email
+							input(type="email").pure-input-1
+
+						.question
+							label Private Contact Website
+							input(type="text").pure-input-1
+
+						.question
+							label Explain when to reach out to this person
+							input(type="text").pure-input-1
+
+						.question
+							a(href="#" data-contact-type="private").add-another-contact + Click to add another <b>private</b> contact 
+
+					fieldset.contact.public-contact
+						.question.initial
+							label Public Contact Name
+							input(type="text").pure-input-1
+
+						.question
+							label Public Contact Organziation
+							input(type="text").pure-input-1
+
+						.question
+							label Public Contact Role
+							input(type="text").pure-input-1
+
+						.question
+							label Public Contact Phone Number
+							input(type="tel").pure-input-1
+
+						.question
+							label Public Contact Email
+							input(type="email").pure-input-1
+
+						.question
+							label Public Contact Website
+							input(type="text").pure-input-1
+
+						.question
+							label Explain when to reach out to this person
+							input(type="text").pure-input-1
+
+						.question
+							a(href="#" data-contact-type="public").add-another-contact + Click to add another <b>public</b> contact 
+
+					.question
+						label Select the contact revealed when a user clicks to learn more
+						select
+							option(selected) District Contact
+							option Public Contact 1
+							option Public Contact 2
+							option Public Contact 3
+							option ... Names should populate from contact names
+
+					.question
+					label Write new learn more text if you wish to override the default text for this place.
+					input(type="text").pure-input-1
+
+
+			.form-section
+				h3.section-heading Notes
+
+				.section-questions
+					.question
+						label Other notes (publicly visible).
+						textarea.pure-input-1
+
+					.question
+						label Other notes (not publicly visible).
+						textarea.pure-input-1
+
+		button(type="submit").pure-button.pure-button-primary Save
+
