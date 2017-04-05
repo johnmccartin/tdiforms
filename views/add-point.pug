@@ -12,29 +12,6 @@ block content
 						label(for="feature_name").control-label Name
 						input(type="text" name="feature_name").pure-input-1.feature-name-input
 
-						//
-							data-conditional-on="is_addressy" data-conditional-value="true"
-
-					.question
-						fieldset(data-hide-via="is_not_addressy").click-to-hide.pure-group.address-inputs
-							label(for="street_address") Street Address
-							input(type="text" name="street_address" placeholder="Preloaded from dropped point." value="123 Main St (Preloaded from dropped point.)").pure-input-1.last-of-section
-
-						label(data-reveal-this="non-address-location" id="is_not_addressy" data-alternate-text="Oops. Let's use the street address.").secondary-question.reveal-via.pointer Is this item at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?
-
-						fieldset(data-reveal-via="is_not_addressy").pure-group.non-address-inputs.click-to-reveal
-							label(for="non_address_location") Describe the location (street intersection, etc.)
-							input(type="text" name="non_address_location").pure-input-1.last-of-section
-
-					//
-						.question
-							label.control-label Is this point locatable at a single address or small range of addresses?
-							.switch
-								input(type="checkbox" id="is_addressy" name="is_addressy" checked).creates-conditional
-								label(for="is_addressy").toggle.round
-
-						
-
 					.question
 						label.control-label Is this item an investment?
 						label.help-text This includes investments of money, materials, time, and/or effort by any person or organization.
@@ -51,10 +28,10 @@ block content
 					.question.conditional-on(data-conditional-on="investment_before_2014" data-conditional-value="true")
 						label Investment data from before 2014 shouldn't be added to this map. We should still make sure there is data for any associated place, though.
 
-					.question.conditional-on(data-conditional-on="includes_investment_info" data-conditional-value="true").creates-conditional.creates-conditional-follows
+					.question.conditional-on(data-conditional-on="includes_investment_info" data-conditional-value="true" name="place_already_exists").creates-conditional.creates-conditional-follows
 						label.control-label Is this investment associated with a 'place' <b>already shown on the map</b>?
 						.buttons.text-centered
-							input(type="radio" name="place_already_exists" value="yes").margin-1.last-of-section
+							input(type="radio" name="place_already_exists" value="yes" checked).margin-1.last-of-section
 							span.margin-right-2 Yes
 							input(type="radio" name="place_already_exists" value="no").margin-1.last-of-section
 							span.margin-right-2 No
@@ -65,31 +42,71 @@ block content
 		.form-section.open.follow-me
 			h3.section-heading Choose location
 
+			// ================= LOCATION FOR PLACE =====================
+
 			.section-questions.conditional-on(data-conditional-on="includes_investment_info" data-conditional-value="false" data-visible="true")
 				.question
-					p Click to add the location of this place
+					p Click the map to add a point at the location of this place.
+
+				.question
+						fieldset(data-hide-via="is_not_addressy").click-to-hide.pure-group.address-inputs
+							label(for="street_address") Street Address
+							input(type="text" name="street_address" placeholder="Preloaded from dropped point." value="123 Main St (Preloaded from dropped point.)").pure-input-1.last-of-section
+
+						label(data-reveal-this="non-address-location" id="is_not_addressy" data-original-text="Is this item at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?" data-alternate-text="Oops. Let's use the street address.").secondary-question.reveal-via.pointer Is this item at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?
+
+						fieldset(data-reveal-via="is_not_addressy").pure-group.non-address-inputs.click-to-reveal
+							label(for="non_address_location") Describe the location (street intersection, etc.)
+							input(type="text" name="non_address_location").pure-input-1.last-of-section
 
 
-
+			// ================= LOCATION FOR INVESTMENT INITIAL =====================
 			.section-questions.conditional-on(data-conditional-on="includes_investment_info" data-conditional-value="true" data-visible="false")
-				.conditional-on(data-conditional-on="place_already_exists" data-conditional-value="yes" data-visible="true")
-					.question
-						p Select the exisitng place from the points on the map, or use the search bar.
 
+				
+				.section-questions.conditional-on(data-conditional-on="place_already_exists" data-conditional-value="yes" data-visible="true")
+					.question
+						p Select the exisitng place from the points on the map, or use the search bar to search through existing places by name.
+
+					.question
+					fieldset(data-hide-via="is_not_addressy").click-to-hide.pure-group.address-inputs
+						label(for="street_address") Street Address
+						input(type="text" name="street_address" placeholder="Preloaded from selected point." value="123 Main St (Preloaded from dropped point.)").pure-input-1.last-of-section
+						
+
+					label(data-reveal-this="non-address-location" id="is_not_addressy" data-original-text="Is this item at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?" data-alternate-text="Oops. Let's use the street address.").secondary-question.reveal-via.pointer Is this item at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?
+
+					fieldset(data-reveal-via="is_not_addressy").pure-group.non-address-inputs.click-to-reveal
+						label(for="non_address_location") Describe the location (street intersection, etc.)
+						input(type="text" name="non_address_location" placeholder="Preloaded from selected point." ).pure-input-1.last-of-section
+				
+				// ================= LOCATION FOR INVESTMENT, PLACE NOT IN MAP =====================
 				.section-questions.conditional-on(data-conditional-on="place_already_exists" data-conditional-value="no" data-visible="false")
 					.question
-						p OK, let's add information on the related place first.
+						p OK, let's add information on the related place first. Click the map to add a point at the location of this place.
+
+					.question
+					fieldset(data-hide-via="is_not_addressy").click-to-hide.pure-group.address-inputs
+						label(for="street_address") Street Address
+						input(type="text" name="street_address").pure-input-1.last-of-section
+						//placeholder="Preloaded from dropped point." value="123 Main St (Preloaded from dropped point.)"
+
+					label(data-reveal-this="non-address-location" id="is_not_addressy" data-original-text="Is this item at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?" data-alternate-text="Oops. Let's use the street address.").secondary-question.reveal-via.pointer Is this item at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?
+
+					fieldset(data-reveal-via="is_not_addressy").pure-group.non-address-inputs.click-to-reveal
+						label(for="non_address_location") Describe the location (street intersection, etc.)
+						input(type="text" name="non_address_location").pure-input-1.last-of-section
 
 		.place-here
 
 		.form-section.conditional-on.conditional-follows(data-conditional-on="includes_investment_info" data-conditional-value="true" data-conditional-follows-on="place_already_exists" data-conditional-follows-value="yes")
 			h3.section-heading Investment Attributes
 
-			.section-questions.conditional-on(data-visible='false' data-conditional-on='investment_before_2014' data-conditional-value='false')
+			.section-questions.conditional-on(data-visible='false' data-conditional-on='investment_before_2014' data-conditional-value='true')
 				.question
 					p We don't need investment data for investments before 2014.
 
-			.section-questions.investment-info-questions.conditional-on(data-visible='true' data-conditional-on='investment_before_2014' data-conditional-value='true')
+			.section-questions.investment-info-questions.conditional-on(data-visible='true' data-conditional-on='investment_before_2014' data-conditional-value='false')
 
 				.question
 					label(for="investment_status") Add an open or close date as needed.

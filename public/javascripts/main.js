@@ -25,12 +25,22 @@ $(document).ready(function(){
 		var id = $(this).attr('id');
 		var $click_to_reveal = $('.click-to-reveal[data-reveal-via="'+id+'"]');
 		var $click_to_hide = $('.click-to-hide[data-hide-via="'+id+'"]');
-		$(this).text($(this).attr('data-alternate-text'));
 
-		//console.log($click_to_hide)
+		if($(this).hasClass('new-item-revealed')) {
+			$(this).removeClass('new-item-revealed').text($(this).attr('data-original-text'));
+			$click_to_reveal.slideUp().attr('data-visible',false);
+			$click_to_hide.slideDown().attr('data-visible',true);
+		} else {
 
-		$click_to_reveal.slideDown().attr('data-visible',true);
-		$click_to_hide.slideUp().attr('data-visible',false);
+			$(this).addClass('new-item-revealed').text($(this).attr('data-alternate-text'));
+			$click_to_reveal.slideDown().attr('data-visible',true);
+			$click_to_hide.slideUp().attr('data-visible',false);
+
+		}
+
+
+
+		
 
 
 
@@ -39,12 +49,10 @@ $(document).ready(function(){
 	
 
 	$('select.creates-conditional').on('change',function(){
-		//console.log('select change')
 
 		var $t = $(this);
 		var name = $t.attr('name');
 		var val = $t.val()
-		//console.log(val)
 
 		var $conditional_on = $(document).find('*[data-conditional-on="'+name+'"]');
 
@@ -52,7 +60,7 @@ $(document).ready(function(){
 
 
 		var $meets_condition = $conditional_on.filter('*[data-conditional-value="'+val+'"]');
-		var $meets_condition_children = $meets_condition.find('.section-questions');
+		var $meets_condition_children = $meets_condition.find('.section-questions[data-visible="true"]');
 		var $form_section = $meets_condition.parents('.form-section');
 		if ( $meets_condition.hasClass('form-section') ) {
 			$form_section = $meets_condition
@@ -82,13 +90,13 @@ $(document).ready(function(){
 
 		var $conditional_on = $(document).find('*[data-conditional-on="'+name+'"]');
 		var $meets_condition = $conditional_on.filter('*[data-conditional-value="'+val+'"]')
-		var $meets_condition_children = $meets_condition.find('.section-questions');
+		var $meets_condition_children = $meets_condition.find('.section-questions[data-visible="true"]');
 		var $form_section = $meets_condition.parents('.form-section');
 		if ( $meets_condition.hasClass('form-section') ) {
 			$form_section = $meets_condition
 		}
 
-		$conditional_on.slideUp();
+		$conditional_on.slideUp().attr('data-visible',false);
 		$meets_condition.slideDown();
 		$form_section.addClass('open');
 		if ($meets_condition_children.length > 0) {
@@ -115,7 +123,7 @@ $(document).ready(function(){
 
 		var $conditional_on = $(document).find('.form-section[data-conditional-follows-on="'+name+'"]');
 		var $meets_condition = $conditional_on.filter('.form-section[data-conditional-follows-value="'+val+'"]');
-		var $meets_condition_children = $meets_condition.find('.section-questions');
+		var $meets_condition_children = $meets_condition.find('.section-questions[data-visible="true"]');
 		console.log($meets_condition)
 
 		$meets_condition.prependTo('.place-here').addClass('open');
