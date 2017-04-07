@@ -220,6 +220,15 @@ a:hover {
 
 .question {
   margin-bottom: 4em;
+
+  &.mandatory {
+    label.control-label {
+      &:after {
+        content: ' * ';
+        color: red;
+      }
+    }
+  }
 }
 
 
@@ -397,6 +406,10 @@ label {
 
 .section-questions {
   display: none;
+
+  &.not-collapsed {
+    display: block;
+  }
 }
 
 b {

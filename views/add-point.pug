@@ -4,39 +4,29 @@ block content
 	h1 Add Item
 
 	form.pure-form.pure-form-stacked
-		.form-section.first-section.open
-			h3.section-heading Initial Questions
-			.section-questions(data-visible="true")
-				fieldset
-					.question
-						label(for="feature_name").control-label Name
-						input(type="text" name="feature_name").pure-input-1.feature-name-input
+		.section-questions.not-collapsed(data-visible="true")
+			fieldset
+				.question.mandatory
+					label(for="feature_name").control-label Name
+					input(type="text" name="feature_name").pure-input-1.feature-name-input
 
-					.question
-						label.control-label Is this item an investment?
-						label.help-text This includes investments of money, materials, time, and/or effort by any person or organization.
-						.switch
-							input(type="checkbox" id="includes_investment_info" name="includes_investment_info").creates-conditional
-							label(for="includes_investment_info").toggle.round
+				.question
+					label.control-label Is there an investment associated with this place?
+					label.help-text Investments can include money, time, and/or assitance.
+					.switch
+						input(type="checkbox" id="includes_investment_info" name="includes_investment_info").creates-conditional
+						label(for="includes_investment_info").toggle.round
 
-					.question.conditional-on(data-conditional-on="includes_investment_info" data-conditional-value="true")
-						label.control-label Was this investment completed before 2014?
-						.switch
-							input(type="checkbox" id="investment_before_2014" name="investment_before_2014").creates-conditional
-							label(for="investment_before_2014").toggle.round
+				.question.conditional-on(data-conditional-on="includes_investment_info" data-conditional-value="true")
+					label.control-label Was this investment completed before the TDI program launched (that is, before 2014)?
+					.switch
+						input(type="checkbox" id="investment_before_2014" name="investment_before_2014").creates-conditional
+						label(for="investment_before_2014").toggle.round
 
-					.question.conditional-on(data-conditional-on="investment_before_2014" data-conditional-value="true")
-						label Investment data from before 2014 shouldn't be added to this map. We should still make sure there is data for any associated place, though.
+				.question.conditional-on(data-conditional-on="investment_before_2014" data-conditional-value="true")
+					label Investment data from before 2014 shouldn't be added to this map. We should still make sure there is data for any associated place, though.
 
-					.question.conditional-on(data-conditional-on="includes_investment_info" data-conditional-value="true" name="place_already_exists").creates-conditional.creates-conditional-follows
-						label.control-label Is this investment associated with a 'place' <b>already shown on the map</b>?
-						.buttons.text-centered
-							input(type="radio" name="place_already_exists" value="yes" checked).margin-1.last-of-section
-							span.margin-right-2 Yes
-							input(type="radio" name="place_already_exists" value="no").margin-1.last-of-section
-							span.margin-right-2 No
-							//input(type="radio" name="place_already_exists" value="maybe").margin-1
-							//span Maybe
+
 
 
 		.form-section.open.follow-me
@@ -45,57 +35,67 @@ block content
 			// ================= LOCATION FOR PLACE =====================
 
 			.section-questions.conditional-on(data-conditional-on="includes_investment_info" data-conditional-value="false" data-visible="true")
-				.question
+				.question.mandatory
 					p Click the map to add a point at the location of this place.
+					p.annotation User would interact with map pane here.
 
-				.question
+				.question.mandatory
 						fieldset(data-hide-via="is_not_addressy").click-to-hide.pure-group.address-inputs
-							label(for="street_address") Street Address
+							label(for="street_address").control-label Street Address
 							input(type="text" name="street_address" placeholder="Preloaded from dropped point." value="123 Main St (Preloaded from dropped point.)").pure-input-1.last-of-section
 
-						label(data-reveal-this="non-address-location" id="is_not_addressy" data-original-text="Is this item at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?" data-alternate-text="Oops. Let's use the street address.").secondary-question.reveal-via.pointer Is this item at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?
+						label(data-reveal-this="non-address-location" id="is_not_addressy" data-original-text="Is this item at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?" data-alternate-text="Oops. Let's use the street address.").secondary-question.reveal-via.pointer Is this place at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?
 
 						fieldset(data-reveal-via="is_not_addressy").pure-group.non-address-inputs.click-to-reveal
-							label(for="non_address_location") Describe the location (street intersection, etc.)
+							label(for="non_address_location").control-label Describe the location (street intersection, etc.)
 							input(type="text" name="non_address_location").pure-input-1.last-of-section
 
 
 			// ================= LOCATION FOR INVESTMENT INITIAL =====================
 			.section-questions.conditional-on(data-conditional-on="includes_investment_info" data-conditional-value="true" data-visible="false")
 
-				
-				.section-questions.conditional-on(data-conditional-on="place_already_exists" data-conditional-value="yes" data-visible="true")
+				.question.conditional-on(data-conditional-on="includes_investment_info" data-conditional-value="true").creates-conditional.creates-conditional-follows
+					label.control-label Is this investment associated with a 'place' <b>already shown on the map</b>?
+					.buttons.text-centered
+					.switch
+						input(type="checkbox" id="place_already_exists" name="place_already_exists").creates-conditional
+						label(for="place_already_exists").toggle.round
+
+				// ================= LOCATION FOR INVESTMENT, PLACE ALREADY EXISTS =====================
+				.section-questions.conditional-on(data-conditional-on="place_already_exists" data-conditional-value="true" data-visible="false")
 					.question
 						p Select the exisitng place from the points on the map, or use the search bar to search through existing places by name.
+						p.annotation User would interact with map pane here.
 
-					.question
-					fieldset(data-hide-via="is_not_addressy").click-to-hide.pure-group.address-inputs
-						label(for="street_address") Street Address
-						input(type="text" name="street_address" placeholder="Preloaded from selected point." value="123 Main St (Preloaded from dropped point.)").pure-input-1.last-of-section
-						
+					.question.mandatory
+						fieldset(data-hide-via="is_not_addressy").click-to-hide.pure-group.address-inputs
+							label(for="street_address").control-label Street Address
+							input(type="text" name="street_address" placeholder="Preloaded from selected point." value="123 Main St (Preloaded from dropped point.)").pure-input-1.last-of-section
+							
 
-					label(data-reveal-this="non-address-location" id="is_not_addressy" data-original-text="Is this item at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?" data-alternate-text="Oops. Let's use the street address.").secondary-question.reveal-via.pointer Is this item at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?
+						label(data-reveal-this="non-address-location" id="is_not_addressy" data-original-text="Is this place at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?" data-alternate-text="Oops. Let's use the street address.").secondary-question.reveal-via.pointer Is this place at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?
 
-					fieldset(data-reveal-via="is_not_addressy").pure-group.non-address-inputs.click-to-reveal
-						label(for="non_address_location") Describe the location (street intersection, etc.)
-						input(type="text" name="non_address_location" placeholder="Preloaded from selected point." ).pure-input-1.last-of-section
+						fieldset(data-reveal-via="is_not_addressy").pure-group.non-address-inputs.click-to-reveal
+							label(for="non_address_location").control-label Describe the location (street intersection, etc.)
+							input(type="text" name="non_address_location" placeholder="Preloaded from selected point." ).pure-input-1.last-of-section
 				
 				// ================= LOCATION FOR INVESTMENT, PLACE NOT IN MAP =====================
-				.section-questions.conditional-on(data-conditional-on="place_already_exists" data-conditional-value="no" data-visible="false")
+				.section-questions.conditional-on(data-conditional-on="place_already_exists" data-conditional-value="false" data-visible="true")
 					.question
 						p OK, let's add information on the related place first. Click the map to add a point at the location of this place.
+						p.annotation User would interact with map pane here.
 
-					.question
-					fieldset(data-hide-via="is_not_addressy").click-to-hide.pure-group.address-inputs
-						label(for="street_address") Street Address
-						input(type="text" name="street_address").pure-input-1.last-of-section
-						//placeholder="Preloaded from dropped point." value="123 Main St (Preloaded from dropped point.)"
+					.question.mandatory
+						fieldset(data-hide-via="is_not_addressy").click-to-hide.pure-group.address-inputs
+							label(for="street_address").control-label Street Address
+							input(type="text" name="street_address").pure-input-1.last-of-section
+							//placeholder="Preloaded from dropped point." value="123 Main St (Preloaded from dropped point.)"
 
-					label(data-reveal-this="non-address-location" id="is_not_addressy" data-original-text="Is this item at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?" data-alternate-text="Oops. Let's use the street address.").secondary-question.reveal-via.pointer Is this item at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?
+						label(data-reveal-this="non-address-location" id="is_not_addressy" data-original-text="Is this place at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?" data-alternate-text="Oops. Let's use the street address.").secondary-question.reveal-via.pointer Is this place at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?
 
-					fieldset(data-reveal-via="is_not_addressy").pure-group.non-address-inputs.click-to-reveal
-						label(for="non_address_location") Describe the location (street intersection, etc.)
-						input(type="text" name="non_address_location").pure-input-1.last-of-section
+						fieldset(data-reveal-via="is_not_addressy").pure-group.non-address-inputs.click-to-reveal
+							label(for="non_address_location").control-label Describe the location (street intersection, etc.)
+							input(type="text" name="non_address_location").pure-input-1.last-of-section
 
 		.place-here
 
@@ -108,8 +108,8 @@ block content
 
 			.section-questions.investment-info-questions.conditional-on(data-visible='true' data-conditional-on='investment_before_2014' data-conditional-value='false')
 
-				.question
-					label(for="investment_status") Add an open or close date as needed.
+				.question.mandatory
+					label(for="investment_status").control-label Add an open or close date as needed.
 					.status-date-group
 						table(data-statuses="investment-statuses" id="investment_status")
 							tr.status-date-row
@@ -127,8 +127,8 @@ block content
 								td
 									a(href='#').status-date-add +
 
-				.question
-						label(for="investment_type") Which type of investment is this?
+				.question.mandatory
+						label(for="investment_type").control-label Which type of investment is this?
 						select(name="investment_type")
 							option(selected disabled) Choose an Investment Type
 							option(value="Infrastructure") Infrastructure
@@ -137,27 +137,27 @@ block content
 							option(value="Placemaking") Placemaking
 
 
-				.question
-					label(for="source_type") Select the source of funding for this project.
+				.question.mandatory
+					label(for="source_type").control-label Select the source of funding for this project.
 					select(name="source_type").creates-conditional
 						option(selected disabled) Choose a Source Type
 						option(value="MassDevelopment") MassDevelopment
 						option(value="Public") Public
 						option(value="Private") Private
 
-				.question
+				.question.mandatory
 					fieldset(data-conditional-on="source_type" data-conditional-value="MassDevelopment").pure-group.address-inputs.conditional-on
 						p.annotation This will be type-ahead form
-						label(for="massdev_product") Product Name (MassDevelopment)
+						label(for="massdev_product").control-label Product Name (MassDevelopment)
 						input(type="text" name="massdev_product").pure-input-1
 
 					fieldset(data-conditional-on="source_type" data-conditional-value="Public").pure-group.address-inputs.conditional-on
 						p.annotation This will be type-ahead form
-						label(for="public_product") Product Name (Public)
+						label(for="public_product").control-label Product Name (Public)
 						input(type="text" name="public_product").pure-input-1
 
 					fieldset(data-conditional-on="source_type" data-conditional-value="Private").pure-group.address-inputs.conditional-on
-						label(for="public_product") Product Name (Private)
+						label(for="public_product").control-label Product Name (Private)
 						select(name="source_type")
 							option(selected disabled) Choose a Private Product
 							option Building Purchase
@@ -167,8 +167,8 @@ block content
 							option New Lease
 							option Other Private Funds
 
-				.question
-					label Is this investment influenced by the TDI program?
+				.question.mandatory
+					label.control-label Is this investment influenced by the TDI program?
 					.switch
 						input(type="checkbox" name="is_tdi_influenced" id="is_tdi_influenced")
 						label(for="is_tdi_influenced").toggle.round
@@ -176,6 +176,7 @@ block content
 				.question
 					label Enter the investment amount (numbers only).
 					input(name="exact_amount" type="number").pure-input-1
+					p.annotation Matt FYI, we need to make sure this input is type=number.
 
 
 				.question
@@ -202,8 +203,8 @@ block content
 			h3.section-heading Place Attributes
 
 			.section-questions(data-visible='true')
-				.question
-					label(for="feature_type") Select the place type
+				.question.mandatory
+					label(for="feature_type").control-label Select the place type
 						span.annotation This test doesn't include all place types.
 					select(name="feature_type").creates-conditional
 						option(selected disabled) Choose a place type
@@ -231,8 +232,8 @@ block content
 							option Co-working
 
 
-				.question
-					label(for="open_close_status") Add an open or close date as needed.
+				.question.mandatory
+					label(for="open_close_status").control-label Add an open or close date as needed.
 					.status-date-group
 						table(data-statuses="open-close" id="open_close_status")
 							tr.status-date-row
