@@ -77,6 +77,37 @@ $(document).ready(function(){
 
 	})
 
+	$(document).on('change','.status-creates-conditional select',function(){
+
+			console.log('look out for me')
+
+			var $t = $(this);
+			var name = $t.parents('table').attr('name');
+			var val = $t.val()
+
+			var $conditional_on = $(document).find('*[data-conditional-on-status="'+name+'"]');
+
+			var $has_not_condition = $conditional_on.not('*[data-conditional-on-status-not-value=""]');
+			var $the_not_condition_met = $has_not_condition.not('*[data-conditional-on-status-not-value="'+val+'"]');
+
+
+			var $meets_condition = $conditional_on.filter('*[data-conditional-on-status-value="'+val+'"]');
+			var $meets_condition_children = $meets_condition.find('.section-questions[data-visible="true"]');
+			var $form_section = $meets_condition.parents('.form-section');
+			if ( $meets_condition.hasClass('form-section') ) {
+				$form_section = $meets_condition
+			}
+
+			$conditional_on.slideUp().attr('data-visible',false);
+			$meets_condition.slideDown().attr('data-visible',true);
+			$the_not_condition_met.slideDown().attr('data-visible',true);
+			$form_section.addClass('open');
+			if ($meets_condition_children.length > 0) {
+				$meets_condition_children.slideDown().attr('data-visible',true);
+			}
+
+		})
+
 	$(document).on('change','input.creates-conditional, .creates-conditional input:radio',function(){
 		var $t = $(this);
 		var name = $t.attr('name');
@@ -284,7 +315,7 @@ function add_new_status() {
 		var year_select = '<select><option>2012</option><option>2013</option><option>2014</option><option>2015</option><option>2016</option><option>2017</option><option>2018</option><option>2019</option><option>2020</option></select>'
 		var month_select = '<select><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select>'
 
-		$('<tr><td>'+status_select+'</td><td>'+month_select+year_select+'</td><td><a href="#" class="status-date-remove">X</a></td></tr>').insertBefore('#'+table_id+' .status-date-add-row')
+		$('<tr class="status-date-row"><td>'+status_select+'</td><td>'+month_select+year_select+'</td><td><a href="#" class="status-date-remove">X</a></td></tr>').insertBefore('#'+table_id+' .status-date-add-row')
 
 		$table.append()
 	})
