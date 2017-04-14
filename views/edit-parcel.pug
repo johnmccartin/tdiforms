@@ -13,7 +13,7 @@ block content
 				h3.section-heading Attributes
 
 
-				.section-questions
+				.section-questions(data-visible="true")
 
 					.question
 						label(for="ownership_type") What kind of entity owns this parcel?
@@ -94,30 +94,31 @@ block content
 
 
 
-					.question
-						label(for="is_vacant_lot") Is this parcel a vacant lot (i.e., it has no structures on it)?
-						.status-date-group
-							table(data-statuses="boolean" id="is_vacant_lot")
-								tr.status-date-row
-									td
-										span.status-date.status-date-existing No
-									td
-										span 2014-01
-									td
-										a(href='#').status-date-remove X
-								tr 
-								tr.status-date-add-row
-									td
-										span.status-date.status-date-add-new Add a new status
-									td
-									td
-										a(href='#').status-date-add +
+					//
+						.question
+							label(for="is_vacant_lot") Is this parcel a vacant lot (i.e., it has no structures on it)?
+							.status-date-group
+								table(data-statuses="boolean" id="is_vacant_lot")
+									tr.status-date-row
+										td
+											span.status-date.status-date-existing No
+										td
+											span 2014-01
+										td
+											a(href='#').status-date-remove X
+									tr 
+									tr.status-date-add-row
+										td
+											span.status-date.status-date-add-new Add a new status
+										td
+										td
+											a(href='#').status-date-add +
 
 
-					.question
+					.question.creates-conditional
 						label(for="ground_floor_vacancy") Is the ground floor of this parcel's building(s) vacant?
 						.status-date-group
-							table(data-statuses="vacancy-gradient" id="ground_floor_vacancy")
+							table(data-statuses="ground-floor-vacancy-gradient" name="ground_floor_vacancy" id="ground_floor_vacancy")
 								tr.status-date-row
 									td
 										span.status-date.status-date-existing Entirely Vacant
@@ -133,10 +134,11 @@ block content
 									td
 										a(href='#').status-date-add +
 				
+					//.question.conditional-on(data-conditional-on="ground_floor_vacancy" data-conditional-not-value="vacant-lot")
 					.question
 						label(for="upper_floor_vacancy") Are the upper floors of this parcel's building(s) vacant?
 						.status-date-group
-							table(data-statuses="vacancy-gradient" id="upper_floor_vacancy")
+							table(data-statuses="upper-floor-vacancy-gradient" id="upper_floor_vacancy")
 								tr.status-date-row
 									td
 										span.status-date.status-date-existing Partially
@@ -157,7 +159,7 @@ block content
 			.form-section
 				h3.section-heading Assessing Info
 
-				.section-questions
+				.section-questions(data-visible="true")
 					.question
 						label Parcel ID
 						input(type="text" value="01D-7365").pure-input-1
@@ -202,7 +204,7 @@ block content
 				.form-section
 					h3.section-heading Related Features and Investments
 					
-					.section-questions
+					.section-questions(data-visible="true")
 						.question
 							span.annotation This will be type-ahead form like in Matt's mockup
 							label Search for and select any features related to this investment.
@@ -221,7 +223,7 @@ block content
 			.form-section
 				h3.section-heading Opportunities and Contacts
 
-				.section-questions
+				.section-questions(data-visible="true")
 
 					fieldset.contact.priv-contact
 						.question.initial
@@ -303,7 +305,7 @@ block content
 			.form-section
 				h3.section-heading Notes
 
-				.section-questions
+				.section-questions(data-visible="true")
 					.question
 						label Other notes (publicly visible).
 						textarea.pure-input-1

@@ -1,7 +1,7 @@
 extends layout
 
 block content
-	h1 Add Item
+	h1 Add Data
 
 	form.pure-form.pure-form-stacked
 		.section-questions.not-collapsed(data-visible="true")
@@ -44,7 +44,7 @@ block content
 							label(for="street_address").control-label Street Address
 							input(type="text" name="street_address" placeholder="Preloaded from dropped point." value="123 Main St (Preloaded from dropped point.)").pure-input-1.last-of-section
 
-						label(data-reveal-this="non-address-location" id="is_not_addressy" data-original-text="Is this item at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?" data-alternate-text="Oops. Let's use the street address.").secondary-question.reveal-via.pointer Is this place at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?
+						label(data-reveal-this="non-address-location" id="is_not_addressy" data-original-text="Is this place at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?" data-alternate-text="Oops. Let's use the street address.").secondary-question.reveal-via.pointer Is this place at too large a scale to be tied to a single address (e.g. a district-wide sidewalk improvement)?
 
 						fieldset(data-reveal-via="is_not_addressy").pure-group.non-address-inputs.click-to-reveal
 							label(for="non_address_location").control-label Describe the location (street intersection, etc.)
@@ -210,6 +210,7 @@ block content
 						option(selected disabled) Choose a place type
 						option(value="food") Food
 						option(value="business") Business
+						option(value="housing") Housing
 
 				.question
 					fieldset(data-conditional-on="feature_type" data-conditional-value="food").pure-group.food-subtypes.conditional-on
@@ -230,6 +231,22 @@ block content
 							option Bank
 							option Corporate Headquarters
 							option Co-working
+
+					fieldset(data-conditional-on="feature_type" data-conditional-value="housing").pure-group.business-subtypes.conditional-on
+						label Select the place sub-type
+						select
+							option -
+							option Single-family residence
+							option 2-4 units
+							option 4-10 units
+							option 10+ units
+
+				.question(data-conditional-value="housing" data-conditional-on="feature_type").conditional-on
+					label Does this place include any affordable housing units?
+					label.help-text Choose yes when housing is public or restricted by income.
+					.switch
+						input(type="checkbox" name="is_affordable" id="is_affordable")
+						label(for="is_affordable").toggle.round
 
 
 				.question.mandatory
@@ -291,8 +308,8 @@ block content
 									a(href='#').status-date-add +
 
 				.question
-					label Is this place a "collision point" for members of the community?
-					label.help-text A "collision point" is a place where community members run into eachother and informally share thoughts and ideas.
+					label Is this place a "community hub"?
+					label.help-text A "community hub" is a place where community members run into eachother and informally share thoughts and ideas.
 					.switch
 						input(type="checkbox" name="is_collision_point" id="is_collision_point")
 						label(for="is_collision_point").toggle.round
@@ -305,7 +322,7 @@ block content
 			h3.section-heading Documents and Links
 			.section-questions(data-visible='true')
 				.question
-					label(for="featured_photo") Add an illustrative photo of this feature (jpg, png).
+					label(for="featured_photo") Add an illustrative photo of this place (jpg, png).
 					input(type="file" name="featured_photo")
 
 				.question
@@ -328,21 +345,21 @@ block content
 
 
 		.form-section
-			h3.section-heading Related Features and Investments
+			h3.section-heading Related Places and Investments
 			
 			.section-questions(data-visible='true')
 				.question
 					span.annotation This will be type-ahead forms like in Matt's mockup
-					label Search for and select any features related to this feature.
+					label Search for and select any places related to this place.
 					input(type="text").pure-input-1
 
 				.question
 					span.annotation This will be type-ahead forms like in Matt's mockup
-					label Search for and select any investments related to this feature.
+					label Search for and select any investments related to this place.
 					input(type="text").pure-input-1
 
 				.question
-					label Explain how these features and/or investments are related to this feature.
+					label Explain how these places and/or investments are related to this place.
 					textarea.pure-input-1
 
 

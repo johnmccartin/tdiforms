@@ -56,7 +56,8 @@ $(document).ready(function(){
 
 		var $conditional_on = $(document).find('*[data-conditional-on="'+name+'"]');
 
-
+		var $has_not_condition = $conditional_on.not('*[data-conditional-not-value=""]');
+		var $not_condition_met = $has_not_condition.not('*[data-conditional-not-value="'+val+'"]');
 
 
 		var $meets_condition = $conditional_on.filter('*[data-conditional-value="'+val+'"]');
@@ -68,6 +69,7 @@ $(document).ready(function(){
 
 		$conditional_on.slideUp().attr('data-visible',false);
 		$meets_condition.slideDown().attr('data-visible',true);
+		$not_condition_met.slideDown().attr('data-visible',true);
 		$form_section.addClass('open');
 		if ($meets_condition_children.length > 0) {
 			$meets_condition_children.slideDown().attr('data-visible',true);
@@ -256,10 +258,14 @@ function add_new_status() {
 			},
 			{
 				"status_type" : "ownership-type",
-				"html" : '<select><option>Publicly owned</option><option>Partner-controlled</option><option>Privately owned</option></select>'
+				"html" : '<select><option>MassDevelopment-owned</option><option>Publicly owned</option><option>Partner-controlled</option><option>Privately owned</option></select>'
 			},
 			{
-				"status_type" : "vacancy-gradient",
+				"status_type" : "ground-floor-vacancy-gradient",
+				"html" : '<select><option value="">Not Vacant</option><option value="">Partially Vacant</option><option value="">Entirely Vacant</option><option value="vacant-lot">Vacant Lot</option></select>'
+			},
+			{
+				"status_type" : "upper-floor-vacancy-gradient",
 				"html" : '<select><option>Not Vacant</option><option>Partially Vacant</option><option>Entirely Vacant</option></select>'
 			}
 		]
@@ -295,7 +301,7 @@ function delete_status() {
 		var $table = $t.parents('table');
 
 		var open_close_select = '<select><option>Open</option><option>Closed</option></select>'
-		var year_select = '<select><option>2012</option><option>2013</option><option>2014</option><option>2015</option><option>2016</option><option>2017</option><option>2018</option><option>2019</option><option>2020</option></select>'
+		var year_select = '<select><option>2014</option><option>2015</option><option>2016</option><option>2017</option><option>2018</option><option>2019</option><option>2020</option></select>'
 		var month_select = '<select><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select>'
 
 		//$('<tr><td>'+open_close_select+'</td><td>'+month_select+year_select+'</td></tr>').insertBefore('.status-date-add-row')
