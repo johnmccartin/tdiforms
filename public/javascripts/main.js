@@ -69,7 +69,7 @@ $(document).ready(function(){
 
 		$conditional_on.slideUp().attr('data-visible',false);
 		$meets_condition.slideDown().attr('data-visible',true);
-		$not_condition_met.slideDown().attr('data-visible',true);
+		//$not_condition_met.slideDown().attr('data-visible',true);
 		$form_section.addClass('open');
 		if ($meets_condition_children.length > 0) {
 			$meets_condition_children.slideDown().attr('data-visible',true);
