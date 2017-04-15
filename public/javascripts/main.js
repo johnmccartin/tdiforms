@@ -39,12 +39,9 @@ $(document).ready(function(){
 		}
 
 
-
-		
-
-
-
 	})
+
+
 
 	
 
@@ -109,6 +106,7 @@ $(document).ready(function(){
 		})
 
 	$(document).on('change','input.creates-conditional, .creates-conditional input:radio',function(){
+		console.log('input change')
 		var $t = $(this);
 		var name = $t.attr('name');
 		var val;
@@ -139,6 +137,7 @@ $(document).ready(function(){
 
 	})
 
+	/*
 	$(document).on('change','input.creates-conditional-follows, .creates-conditional-follows input:radio',function(){
 		console.log('follows')
 		var $t = $(this);
@@ -164,32 +163,8 @@ $(document).ready(function(){
 			$meets_condition_children.slideDown();
 		}
 
-
-		//$meets_condition.after($('.follow-me')).appendTo('form');
-
-		/*
-		var $meets_condition_children = $meets_condition.find('.section-questions');
-		
-		var $form_section = $meets_condition.parents('.form-section');
-		if ( $meets_condition.hasClass('form-section') ) {
-			$form_section = $meets_condition
-		}
-		*/
-
-
-
-
-		/*
-		$conditional_on.slideUp();
-		$meets_condition.slideDown();
-		$form_section.addClass('open');
-		if ($meets_condition_children.length > 0) {
-			$meets_condition_children.slideDown();
-		}
-		*/
-
-
 	})
+	*/
 
 
 
@@ -204,13 +179,21 @@ function init_conditionals() {
 		var condition_name = $t.attr('name')
 		var current_value = $t.val()
 
+
+
 		if (this.checked) {
 			current_value = true
 		} else {
 			current_value = false
 		}
 
-		console.log(condition_name,current_value)
+		if ( $t.is('select') ) {
+			var $target_option = $t.find(':selected')
+			//console.log($target_option, $target_option.val())
+			current_value = $target_option.val()
+		}
+
+		//console.log(condition_name,current_value)
 
 
 		var $target_field = $conditional_on.filter('*[data-conditional-on="'+condition_name+'"][data-conditional-value="'+current_value+'"]')
@@ -312,7 +295,7 @@ function add_new_status() {
 		}
 
 		
-		var year_select = '<select><option>2012</option><option>2013</option><option>2014</option><option>2015</option><option>2016</option><option>2017</option><option>2018</option><option>2019</option><option>2020</option></select>'
+		var year_select = '<select><option>2014</option><option>2015</option><option>2016</option><option>2017</option><option>2018</option><option>2019</option><option>2020</option></select>'
 		var month_select = '<select><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select>'
 
 		$('<tr class="status-date-row"><td>'+status_select+'</td><td>'+month_select+year_select+'</td><td><a href="#" class="status-date-remove">X</a></td></tr>').insertBefore('#'+table_id+' .status-date-add-row')
@@ -418,27 +401,10 @@ function another_contact() {
 }
 
 
-//worked around this. ignore
-function checkConditional(input) {
-	console.log('rawtype: '+typeof input)
-	//console.log('raw: '+input)
-	input = JSON.parse(input)
-
-	if (typeof input == 'string') {
-		console.log('do something to string')
-	} else if ($.isArray(input) == true) {
-		console.log('do something to array')
-	}
-
-	var $conditionals = $('.conditional-on')
-	$conditionals.each(function(i){
-
-		var conditional_on = $(this).attr('data-conditional-on');
-
-	});
 
 
-}
+
+
 
 $.fn.moveUp = function() {
     $.each(this, function() {

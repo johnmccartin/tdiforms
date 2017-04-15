@@ -3,11 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('add-point', { title: 'Add Point' });
+  res.render('add-point-rework1', { title: 'Add Point' });
 });
 
 router.get('/add-point-new', function(req, res, next) {
-  res.render('add-point-rework1', { title: 'Add Point' });
+  res.render('add-point', { title: 'Add Point' });
 });
 
 router.get('/add-investment', function(req, res, next) {
