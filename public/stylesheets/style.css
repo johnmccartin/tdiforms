@@ -892,3 +892,10 @@ b {
 .click-to-reveal {
   display: none;
 }
+
+/* line 447, ../sass/style.scss */
+.place-info {
+  border: 1px solid black;
+  box-sizing: border-box;
+  padding: 1em;
+}

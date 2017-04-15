@@ -581,7 +581,14 @@ block content
 		#location-found.conditional-on(data-conditional-on="place_is_found" data-conditional-value="true")
 			.form-section
 				.question
-					label We found a place at that location. Would you like to add investment data to this place?
+					p We found an existing place at that location:
+					.place-info
+						p Place Name: Jimmy's Café
+						p Place Type: Food
+						p Place Subtype: Cafe
+						
+				.question
+					label Would you like to add investment data to this place?
 					.switch
 						input(type="checkbox" id="add_inv_to_place" name="add_inv_to_place" checked).creates-conditional
 						label(for="add_inv_to_place").toggle.round
