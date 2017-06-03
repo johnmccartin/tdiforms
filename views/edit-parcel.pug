@@ -6,7 +6,8 @@ block content
 	form.pure-form.pure-form-stacked
 		fieldset
 			.question
-				label(for="feature_name").control-label Enter the address
+				label(for="feature_name").control-label Enter the address.
+				span.annotation Prepopulated from MassGIS / BxB v1
 				input(type="text" name="feature_name" value=" 123 Shirely Ave.").pure-input-1.feature-name-input
 
 			.form-section
@@ -163,10 +164,12 @@ block content
 				.section-questions(data-visible="true")
 					.question
 						label Parcel ID
+						span.annotation Prepopulated from MassGIS / BxB v1
 						input(type="text" value="01D-7365").pure-input-1
 
 					.question
 						label Land Use
+						span.annotation Prepopulated from MassGIS / BxB v1
 						select
 							option Residential
 							option(selected) Commercial
@@ -175,6 +178,11 @@ block content
 							option Industrial
 							option Open Space
 							option Other
+
+					.question
+						label Year Built
+						span.annotation Prepopulated from MassGIS / BxB v1
+						input(type="text" value="1920").pure-input-1
 
 
 			//
@@ -228,27 +236,27 @@ block content
 
 					fieldset.contact.priv-contact
 						.question.initial
-							label Private Contact Name
+							label Owner Contact Name
 							input(type="text").pure-input-1
 
 						.question
-							label Private Contact Organziation
+							label Owner Contact Organziation
 							input(type="text").pure-input-1
 
 						.question
-							label Private Contact Role
+							label Owner Contact Role
 							input(type="text").pure-input-1
 
 						.question
-							label Private Contact Phone Number
+							label Owner Contact Phone Number
 							input(type="tel").pure-input-1
 
 						.question
-							label Private Contact Email
+							label Owner Contact Email
 							input(type="email").pure-input-1
 
 						.question
-							label Private Contact Website
+							label Owner Contact Website
 							input(type="text").pure-input-1
 
 						.question
